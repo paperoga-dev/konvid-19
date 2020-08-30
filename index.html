@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>KONVID-19 v0.5</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="konvid.js"></script>
+</head>
+
+<body onload="init()">
+    <div class="content">
+        <table border="0" summary="" width="70%">
+            <tr>
+                <td>
+                    <input type="checkbox" checked="true" id="chkKillerHasFever" data-ck="khf" onchange="update()">
+                    <label for="chkKillerHasFever">L'untore ha la febbre?</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Giorni tra contatto e febbre dell'untore:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="slidecontainer">
+                        <form>
+                            <input type="range" min="-14" max="2" value="1" data-ck="dbcaf" class="slider" step="1"
+                                id="slDaysBetweenContactAndFever" list="steplistA" onchange="update()"></input>
+                            <output id="slDaysBetweenContactAndFeverValue" for="slDaysBetweenContactAndFever">0</output>
+                            <datalist id="steplistA">
+                                <option>-14</option>
+                                <option>-10</option>
+                                <option>-6</option>
+                                <option>-2</option>
+                                <option>2</option>
+                            </datalist>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Tampone untore:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="0" summary="" width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Negativo
+                                    <input type="radio" checked="checked" data-ck="kss1" name="btnKillerSwabState"
+                                        value="0.8" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Positivo
+                                    <input type="radio" data-ck="kss2" name="btnKillerSwabState" value="1.5"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Non eseguito
+                                    <input type="radio" data-ck="kss3" name="btnKillerSwabState" value="1"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="slidecontainer">
+                                    <form>
+                                        <input type="range" min="-15" max="3" value="1" data-ck="dtvc" class="slider"
+                                            step="1" id="slDaysToVictimContact" list="steplistB"
+                                            onchange="update()"></input>
+                                        <output id="slDaysToVictimContactValue" for="slDaysToVictimContact">0</output>
+                                        <datalist id="steplistB">
+                                            <option>-15</option>
+                                            <option>-12</option>
+                                            <option>-9</option>
+                                            <option>-6</option>
+                                            <option>-3</option>
+                                            <option>0</option>
+                                            <option>3</option>
+                                        </datalist>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Tampone vittima:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="0" summary="" width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Negativo
+                                    <input type="radio" checked="checked" data-ck="vss1" name="btnVictimSwabState"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Positivo
+                                    <input type="radio" data-ck="vss2" name="btnVictimSwabState" value="1"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Non eseguito
+                                    <input type="radio" data-ck="vss3" name="btnVictimSwabState" value="1"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="slidecontainer">
+                                    <form>
+                                        <input type="range" min="0" max="16" value="1" data-ck="dtkc" class="slider"
+                                            step="1" id="slDaysToKillerContact" list="steplistC"
+                                            onchange="update()"></input>
+                                        <output id="slDaysToKillerContactValue" for="slDaysToKillerContact">0</output>
+                                        <datalist id="steplistC">
+                                            <option>0</option>
+                                            <option>4</option>
+                                            <option>8</option>
+                                            <option>12</option>
+                                            <option>16</option>
+                                        </datalist>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Durata contatto (minuti):
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="slidecontainer">
+                        <form>
+                            <input type="range" min="0" max="720" value="5" data-ck="cdv" class="slider" step="1"
+                                id="slContactDuration" onchange="update()"></input>
+                            <output id="slContactDurationValue" for="slContactDuration">0</output>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Distanza tra untore e martire (cm):
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="slidecontainer">
+                        <form>
+                            <input type="range" min="0" max="500" value="100" data-ck="adv" class="slider" step="1"
+                                id="slActorsDistance" onchange="update()"></input>
+                            <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="checkbox" id="chkOpenSpace" data-ck="os" onchange="update()">
+                    <label for="chkOpenSpace">Luogo aperto?</label>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Fattore di protezione untore:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Nessuno
+                                    <input type="radio" checked="checked" data-ck="kst1" name="btnKillerShieldType"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Sciarpa
+                                    <input type="radio" data-ck="kst2" name="btnKillerShieldType" value="40"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Chirurgica
+                                    <input type="radio" data-ck="kst3" name="btnKillerShieldType" value="50"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP2
+                                    <input type="radio" data-ck="kst4" name="btnKillerShieldType" value="95"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP2 con valvola
+                                    <input type="radio" data-ck="kst5" name="btnKillerShieldType" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP3
+                                    <input type="radio" data-ck="kst6" name="btnKillerShieldType" value="98"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP3 con valvola
+                                    <input type="radio" data-ck="kst7" name="btnKillerShieldType" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Fattore di protezione martire:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Nessuno
+                                    <input type="radio" checked="checked" data-ck="vst1" name="btnVictimShieldType"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Sciarpa
+                                    <input type="radio" data-ck="vst2" name="btnVictimShieldType" value="40"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Chirurgica
+                                    <input type="radio" data-ck="vst3" name="btnVictimShieldType" value="50"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP2
+                                    <input type="radio" data-ck="vst4" name="btnVictimShieldType" value="95"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP2 con valvola
+                                    <input type="radio" data-ck="vst5" name="btnVictimShieldType" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP3
+                                    <input type="radio" data-ck="vst6" name="btnVictimShieldType" value="98"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">FPP3 con valvola
+                                    <input type="radio" data-ck="vst7" name="btnVictimShieldType" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Et&agrave; martire:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="slidecontainer">
+                        <form>
+                            <input type="range" min="0" max="100" value="40" data-ck="vav" class="slider" step="1"
+                                id="slVictimAge" onchange="update()"></input>
+                            <output id="slVictimAgeValue" for="slVictimAge">0</output>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Severit&agrave; patologia 1 martire:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Nessuna
+                                    <input type="radio" checked="checked" data-ck="i1s1" name="btnIllness1Severity"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Media
+                                    <input type="radio" data-ck="i1s2" name="btnIllness1Severity" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Grave
+                                    <input type="radio" data-ck="i1s3" name="btnIllness1Severity" value="50"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Severit&agrave; patologia 2 martire:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Nessuna
+                                    <input type="radio" checked="checked" data-ck="i2s1" name="btnIllness2Severity"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Media
+                                    <input type="radio" data-ck="i2s2" name="btnIllness2Severity" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Grave
+                                    <input type="radio" data-ck="i2s3" name="btnIllness2Severity" value="50"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Severit&agrave; patologia 3 martire:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Nessuna
+                                    <input type="radio" checked="checked" data-ck="i3s1" name="btnIllness3Severity"
+                                        value="0" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Media
+                                    <input type="radio" data-ck="i3s2" name="btnIllness3Severity" value="30"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Grave
+                                    <input type="radio" data-ck="i3s3" name="btnIllness3Severity" value="50"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p id="debug">
+    </p>
+
+    <div class="fixed-footer">
+        <h2>
+            Fattore di rischio<br>
+            <div class="progress">
+                <div class="progress-done" data-done="0">
+                    0%
+                </div>
+            </div>
+            <br>
+        </h2>
+    </div>
+</body>
+
+</html>
