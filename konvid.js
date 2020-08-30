@@ -41,37 +41,40 @@ function createDataForCookie(dataDict) {
 }
 
 function update() {
-    var killerHasFever = document.getElementById("chkKillerHasFever").checked;
+    var killerHasFever = null;
     var R = null;
     var daysBetweenContactAndFever = null;
 
-    document.getElementById("slDaysBetweenContactAndFever").disabled = !killerHasFever;
+    document.getElementsByName("btnKillerHasFever").forEach((btn) => { if (btn.checked) killerHasFever = parseFloat(btn.value); });
+    if (killerHasFever === 1.0) {
+        document.getElementById("slDaysBetweenContactAndFever").disabled = false;
 
-    if (!killerHasFever)
+        daysBetweenContactAndFever = 2.0 - document.getElementById("slDaysBetweenContactAndFever").valueAsNumber;
+        R = Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805;
+    } else {
+        document.getElementById("slDaysBetweenContactAndFever").disabled = true;
         R = 0.5;
-    else {
-        var daysBetweenContactAndFever = 2.0 - document.getElementById("slDaysBetweenContactAndFever").value;
-        var R = Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805;
     }
 
-    var contactDuration = document.getElementById("slContactDuration").value;
-    var fp = contactDuration / 720.0;
+    var contactDuration = document.getElementById("slContactDuration").valueAsNumber;
+    var fp = ((Math.log(contactDuration + 1.0)) / (Math.log(61.0))) + 0.5;
 
-    var actorsDistance = document.getElementById("slActorsDistance").value;
-    var ne = Math.pow(1.0 - actorsDistance / 500.0, 2.0);
+    var actorsDistance = document.getElementById("slActorsDistance").valueAsNumber;
+    var ne = Math.pow(1.0 - actorsDistance / 250.0, 2.0);
 
-    var openSpace = document.getElementById("chkOpenSpace").checked ? 80.0 : 100.0;
-    var fl = openSpace / 100.0;
+    var closedSpace = null;
+    document.getElementsByName("btnPlaceType").forEach((btn) => { if (btn.checked) closedSpace = parseFloat(btn.value); });
+    var fl = ((closedSpace === 1.0) ? 100.0 : 80.0) / 100.0;
 
     var killerShield = 0;
-    document.getElementsByName("btnKillerShieldType").forEach((btn) => { if (btn.checked) killerShield = btn.value; });
+    document.getElementsByName("btnKillerShieldType").forEach((btn) => { if (btn.checked) killerShield = parseFloat(btn.value); });
     var fi = 1.0 - killerShield / 100.0;
 
     var victimShield = 0;
-    document.getElementsByName("btnVictimShieldType").forEach((btn) => { if (btn.checked) victimShield = btn.value; });
+    document.getElementsByName("btnVictimShieldType").forEach((btn) => { if (btn.checked) victimShield = parseFloat(btn.value); });
     var fc = 1.0 - victimShield / 100.0;
 
-    var victimAge = document.getElementById("slVictimAge").value;
+    var victimAge = document.getElementById("slVictimAge").valueAsNumber;
     var mL = null;
     if ((victimAge >= 0) && (victimAge < 10))
         mL = 0.0;
@@ -99,29 +102,32 @@ function update() {
     var L = (mL / 200.0) + 1.0;
 
     var tu = null;
-    var daysToVictimContact = document.getElementById("slDaysToVictimContact").value;
+    var daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
     if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
         ((daysToVictimContact >= 3)))
         tu = 1.0;
     else
-        document.getElementsByName("btnKillerSwabState").forEach((btn) => { if (btn.checked) tu = btn.value; });
+        document.getElementsByName("btnKillerSwabState").forEach((btn) => { if (btn.checked) tu = parseFloat(btn.value); });
 
     var tm = null;
-    document.getElementsByName("btnKillerSwabState").forEach((btn) => { if (btn.checked) tm = btn.value; });
+    document.getElementsByName("btnVictimSwabState").forEach((btn) => { if (btn.checked) tm = parseFloat(btn.value); });
     if (tm != 1) {
-        var daysToKillerContact = document.getElementById("slDaysToKillerContact").value;
+        document.getElementById("slDaysToKillerContact").disabled = false;
+        var daysToKillerContact = document.getElementById("slDaysToKillerContact").valueAsNumber;
         if ((daysToKillerContact >= 0) && (daysToKillerContact <= 3))
             tm = 1.0;
         else
             tm = 0.3;
+    } else {
+        document.getElementById("slDaysToKillerContact").disabled = true;
     }
 
     var illness1Severity = null;
-    document.getElementsByName("btnIllness1Severity").forEach((btn) => { if (btn.checked) illness1Severity = btn.value; });
+    document.getElementsByName("btnIllness1Severity").forEach((btn) => { if (btn.checked) illness1Severity = parseFloat(btn.value); });
     var illness2Severity = null;
-    document.getElementsByName("btnIllness2Severity").forEach((btn) => { if (btn.checked) illness2Severity = btn.value; });
+    document.getElementsByName("btnIllness2Severity").forEach((btn) => { if (btn.checked) illness2Severity = parseFloat(btn.value); });
     var illness3Severity = null;
-    document.getElementsByName("btnIllness3Severity").forEach((btn) => { if (btn.checked) illness3Severity = btn.value; });
+    document.getElementsByName("btnIllness3Severity").forEach((btn) => { if (btn.checked) illness3Severity = parseFloat(btn.value); });
 
     if (illness1Severity < illness2Severity)
         [illness1Severity, illness2Severity] = [illness2Severity, illness1Severity];
@@ -139,7 +145,7 @@ function update() {
     var P = (((((P1 * P2 * P3) - 1.0) / ((1.5 * 1.25 * 1.125) - 1.0)) * 0.5) + 1.0)
 
     var realN = R * tu * tm * fp * ne * fl * fi * fc * L * P;
-    var N = Math.round(realN * 100.0);
+    var N = Math.min(100, Math.round(realN * 100.0 / 5.0));
 
     var progress = document.querySelector('.progress-done');
     progress.setAttribute('data-done', N);
@@ -156,7 +162,7 @@ function update() {
         } else if (elem.type == "checkbox") {
             cookieDict[elem.getAttribute("data-ck")] = elem.checked;
         } else {
-            cookieDict[elem.getAttribute("data-ck")] = elem.value;
+            cookieDict[elem.getAttribute("data-ck")] = elem.valueAsNumber;
         }
     })
 
@@ -170,7 +176,7 @@ function update() {
             "fp = " + fp + "<br><br>" +
             "actorsDistance = " + actorsDistance + "<br>" +
             "ne = " + ne + "<br><br>" +
-            "openSpace = " + openSpace + "<br>" +
+            "closedSpace = " + closedSpace + "<br>" +
             "fl = " + fl + "<br><br>" +
             "killerShield = " + killerShield + "<br>" +
             "fi = " + fi + "<br><br>" +
@@ -194,7 +200,7 @@ function update() {
 
     var slElems = document.querySelectorAll('input[type="range"], input[type="range"][list]');
     slElems.forEach(slElem => {
-        document.getElementById(slElem.id + "Value").value = slElem.value;
+        document.getElementById(slElem.id + "Value").value = slElem.valueAsNumber;
     });
 }
 
@@ -214,7 +220,7 @@ function init() {
             if ((elem.type === "checkbox") || (elem.type === "radio"))
                 elem.checked = cookieDict[elem.getAttribute("data-ck")];
             else
-                elem.value = cookieDict[elem.getAttribute("data-ck")];
+                elem.valueAsNumber = cookieDict[elem.getAttribute("data-ck")];
         });
     }
 

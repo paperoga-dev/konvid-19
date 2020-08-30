@@ -14,35 +14,60 @@
 
 <body onload="init()">
     <div class="content">
-        <table border="0" summary="" width="70%">
+        <table border="0" summary="" width="60%">
             <tr>
                 <td>
-                    <input type="checkbox" checked="true" id="chkKillerHasFever" data-ck="khf" onchange="update()">
-                    <label for="chkKillerHasFever">L'untore ha la febbre?</label>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    Giorni tra contatto e febbre dell'untore:
+                    L'untore ha la febbre:
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class="slidecontainer">
-                        <form>
-                            <input type="range" min="-14" max="2" value="1" data-ck="dbcaf" class="slider" step="1"
-                                id="slDaysBetweenContactAndFever" list="steplistA" onchange="update()"></input>
-                            <output id="slDaysBetweenContactAndFeverValue" for="slDaysBetweenContactAndFever">0</output>
-                            <datalist id="steplistA">
-                                <option>-14</option>
-                                <option>-10</option>
-                                <option>-6</option>
-                                <option>-2</option>
-                                <option>2</option>
-                            </datalist>
-                        </form>
-                    </div>
+                    <table border="0" summary="" width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">S&igrave;
+                                    <input type="radio" checked="checked" data-ck="khf1" name="btnKillerHasFever"
+                                        value="1" onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">No
+                                    <input type="radio" data-ck="khf2" name="btnKillerHasFever" value="0"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">Non lo so
+                                    <input type="radio" data-ck="khf3" name="btnKillerHasFever" value="0"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Giorni tra contatto e febbre dell'untore:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="slidecontainer">
+                                    <form>
+                                        <input type="range" min="-14" max="2" value="1" data-ck="dbcaf" class="slider"
+                                            step="1" id="slDaysBetweenContactAndFever" onchange="update()"></input>
+                                        <output id="slDaysBetweenContactAndFeverValue"
+                                            for="slDaysBetweenContactAndFever">0</output>
+                                        <div class="sliderticks">
+                                            <option>-14</option>
+                                            <option>-10</option>
+                                            <option>-6</option>
+                                            <option>-2</option>
+                                            <option>2</option>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
 
@@ -80,13 +105,17 @@
                         </tr>
                         <tr>
                             <td colspan="3">
+                                Giorni tra contatto martire e tampone:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
                                 <div class="slidecontainer">
                                     <form>
                                         <input type="range" min="-15" max="3" value="1" data-ck="dtvc" class="slider"
-                                            step="1" id="slDaysToVictimContact" list="steplistB"
-                                            onchange="update()"></input>
+                                            step="1" id="slDaysToVictimContact" onchange="update()"></input>
                                         <output id="slDaysToVictimContactValue" for="slDaysToVictimContact">0</output>
-                                        <datalist id="steplistB">
+                                        <div class="sliderticks">
                                             <option>-15</option>
                                             <option>-12</option>
                                             <option>-9</option>
@@ -94,13 +123,17 @@
                                             <option>-3</option>
                                             <option>0</option>
                                             <option>3</option>
-                                        </datalist>
+                                        </div>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                     </table>
                 </td>
+            </tr>
+
+            <tr class="spacer">
+                <td></td>
             </tr>
 
             <tr>
@@ -133,19 +166,23 @@
                         </tr>
                         <tr>
                             <td colspan="3">
+                                Giorni tra contatto untore e tampone:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
                                 <div class="slidecontainer">
                                     <form>
                                         <input type="range" min="0" max="16" value="1" data-ck="dtkc" class="slider"
-                                            step="1" id="slDaysToKillerContact" list="steplistC"
-                                            onchange="update()"></input>
+                                            step="1" id="slDaysToKillerContact" onchange="update()"></input>
                                         <output id="slDaysToKillerContactValue" for="slDaysToKillerContact">0</output>
-                                        <datalist id="steplistC">
+                                        <div class="sliderticks">
                                             <option>0</option>
                                             <option>4</option>
                                             <option>8</option>
                                             <option>12</option>
                                             <option>16</option>
-                                        </datalist>
+                                        </div>
                                     </form>
                                 </div>
                             </td>
@@ -167,9 +204,18 @@
                 <td>
                     <div class="slidecontainer">
                         <form>
-                            <input type="range" min="0" max="720" value="5" data-ck="cdv" class="slider" step="1"
+                            <input type="range" min="0" max="60" value="5" data-ck="cdv" class="slider" step="1"
                                 id="slContactDuration" onchange="update()"></input>
                             <output id="slContactDurationValue" for="slContactDuration">0</output>
+                            <div class="sliderticks">
+                                <option>0</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                                <option>50</option>
+                                <option>60</option>
+                            </div>
                         </form>
                     </div>
                 </td>
@@ -188,9 +234,17 @@
                 <td>
                     <div class="slidecontainer">
                         <form>
-                            <input type="range" min="0" max="500" value="100" data-ck="adv" class="slider" step="1"
+                            <input type="range" min="0" max="250" value="100" data-ck="adv" class="slider" step="1"
                                 id="slActorsDistance" onchange="update()"></input>
                             <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
+                            <div class="sliderticks">
+                                <option>0</option>
+                                <option>50</option>
+                                <option>100</option>
+                                <option>150</option>
+                                <option>200</option>
+                                <option>250</option>
+                            </div>
                         </form>
                     </div>
                 </td>
@@ -202,8 +256,26 @@
 
             <tr>
                 <td>
-                    <input type="checkbox" id="chkOpenSpace" data-ck="os" onchange="update()">
-                    <label for="chkOpenSpace">Luogo aperto?</label>
+                    Luogo d'incontro:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="0" summary="" width="100%">
+                        <tr>
+                            <td>
+                                <label class="radiocontainer">Al chiuso
+                                    <input type="radio" checked="checked" data-ck="pt1" name="btnPlaceType" value="1"
+                                        onchange="update()">
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiocontainer">All'aperto
+                                    <input type="radio" data-ck="pt2" name="btnPlaceType" value="0" onchange="update()">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
 
@@ -339,6 +411,14 @@
                             <input type="range" min="0" max="100" value="40" data-ck="vav" class="slider" step="1"
                                 id="slVictimAge" onchange="update()"></input>
                             <output id="slVictimAgeValue" for="slVictimAge">0</output>
+                            <div class="sliderticks">
+                                <option>0</option>
+                                <option>20</option>
+                                <option>40</option>
+                                <option>60</option>
+                                <option>80</option>
+                                <option>100</option>
+                            </div>
                         </form>
                     </div>
                 </td>
