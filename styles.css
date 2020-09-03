@@ -56,6 +56,21 @@ body {
   margin: 0 0 20px 0;
 }
 
+fieldset {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+legend {
+  background: #FF9;
+  border: solid 1px black;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 6px;
+}
+
 .progress {
 	background-color: #d8d8d8;
 	border-radius: 20px;
