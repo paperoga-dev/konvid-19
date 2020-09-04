@@ -229,7 +229,9 @@ function update() {
 
     setCookie(createDataForCookie(cookieDict), 30);
 
-    if (window.location.search.endsWith("?debug")) {
+    var isDebug = window.location.search.endsWith("?debug");
+
+    if (isDebug) {
         document.getElementById("debug").innerHTML =
             "daysBetweenContactAndFever = " + daysBetweenContactAndFever + "<br>" +
             "R = " + R + "<br><br>" +
@@ -261,7 +263,9 @@ function update() {
 
     var slElems = document.querySelectorAll('input[type="range"], input[type="range"][list]');
     slElems.forEach(slElem => {
-        document.getElementById(slElem.id + "Value").value = slElem.valueAsNumber;
+        var outputElement = document.getElementById(slElem.id + "Value");
+        outputElement.value = slElem.valueAsNumber;
+        outputElement.style.display = (isDebug) ? "inline" : "none";
     });
 }
 
@@ -286,6 +290,21 @@ function init() {
     }
 
     update();
+}
+
+function cookiePopup() {
+    // Get the modal
+    var modal = document.getElementById("cookieDialog");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("acceptButton")[0];
+
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
 }
 
 
