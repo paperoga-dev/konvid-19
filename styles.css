@@ -72,26 +72,27 @@ legend {
 }
 
 .progress {
-	background-color: #d8d8d8;
-	border-radius: 20px;
-	position: relative;
-	margin: 15px 0;
+  border-radius: 20px;
+  display: grid;
+  background: lightgray;
   height: 30px;
-  width: 70%;
+  width: 90%;
 }
 
 .progress-done {
-	background: linear-gradient(to left, #F2709C, #FF9472);
-	box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
-	border-radius: 20px;
-	color: #fff;
-	display: flex;
-	align-items: center;
+  border-radius: 20px;
+  grid-area: 1 / 1;
+  width: 0;
+  height: 30px;
+  transition: 1.5s ease 0.5s;
+}
+
+.progress-value {
+  grid-area: 1 / 1;
+  color: black;
+  text-align: center;
 	justify-content: center;
-	height: 100%;
-	width: 0;
-	opacity: 0;
-	transition: 1s ease 0.3s;
+  width: 90%;
 }
 
 /* The Modal (background) */

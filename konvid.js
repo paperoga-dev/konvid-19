@@ -40,6 +40,16 @@ function createDataForCookie(dataDict) {
     return list.join("|");
 }
 
+function getSelectedRadio(radioName) {
+    var radioValue = null;
+    document.getElementsByName(radioName).forEach((btn) => { if (btn.checked) radioValue = parseInt(btn.value); });
+    return radioValue;
+}
+
+function disableRadio(radioName, disabledState) {
+    document.getElementsByName(radioName).forEach((btn) => { btn.disabled = disabledState; });
+}
+
 function update() {
     var tm = null;
     var daysToKillerContact = null;
@@ -47,7 +57,6 @@ function update() {
     var tu = null;
     var daysToVictimContact = null;
 
-    var killerHasFever = null;
     var R = null;
     var daysBetweenContactAndFever = null;
 
@@ -82,55 +91,93 @@ function update() {
     var realN = null;
 
     try {
-        document.getElementsByName("btnVictimSwabState").forEach((btn) => { if (btn.checked) tm = parseFloat(btn.value); });
-        if (tm === 3.0) {
-            document.getElementById("slDaysToKillerContact").disabled = true;
-            tm = 1.0;
-        } else if (tm === 2.0) {
-            document.getElementById("slDaysToKillerContact").disabled = true;
-            throw 0;
-        } else if (tm === 1.0) {
-            document.getElementById("slDaysToKillerContact").disabled = true;
-            tm = 0.3;
-        } else {
-            document.getElementById("slDaysToKillerContact").disabled = false;
-            daysToKillerContact = document.getElementById("slDaysToKillerContact").valueAsNumber;
-            if ((daysToKillerContact >= 0) && (daysToKillerContact <= 3))
+        switch (getSelectedRadio("btnVictimSwabState")) {
+            case 2:
+                document.getElementById("slDaysToKillerContact").disabled = true;
+                disableRadio("btnVictimSwabDate", true);
+
                 tm = 1.0;
-            else
-                tm = 0.3;
+                break;
+
+            case 1:
+                document.getElementById("slDaysToKillerContact").disabled = true;
+                disableRadio("btnVictimSwabDate", true);
+
+                throw 0;
+
+            default:
+                disableRadio("btnVictimSwabDate", false);
+
+                switch (getSelectedRadio("btnVictimSwabDate")) {
+                    case 1:
+                        document.getElementById("slDaysToKillerContact").disabled = false;
+                        daysToKillerContact = document.getElementById("slDaysToKillerContact").valueAsNumber;
+                        if ((daysToKillerContact >= 0) && (daysToKillerContact <= 3))
+                            tm = 1.0;
+                        else
+                            tm = 0.3;
+                        break;
+
+                    default:
+                        document.getElementById("slDaysToKillerContact").disabled = true;
+                        tm = 0.3;
+                        break;
+                }
+                break;
         }
 
-        document.getElementsByName("btnKillerSwabState").forEach((btn) => { if (btn.checked) tu = parseFloat(btn.value); });
-        if (tu === 4) {
-            document.getElementById("slDaysToVictimContact").disabled = true;
-            tu = 1.0;
-        } else if (tu === 3) {
-            document.getElementById("slDaysToVictimContact").disabled = true;
-            tu = 1.1;
-        } else if (tu === 2) {
-            document.getElementById("slDaysToVictimContact").disabled = false;
-            daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
-            if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
-                ((daysToVictimContact >= 3)))
+        switch (getSelectedRadio("btnKillerSwabState")) {
+            case 2:
+                document.getElementById("slDaysToVictimContact").disabled = true;
+                disableRadio("btnKillerSwabDate", true);
+
                 tu = 1.0;
-            else
-                tu = 1.1;
-        } else if (tu === 1) {
-            document.getElementById("slDaysToVictimContact").disabled = true;
-            tu = 0.8;
-        } else {
-            document.getElementById("slDaysToVictimContact").disabled = false;
-            daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
-            if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
-                ((daysToVictimContact >= 3)))
-                tu = 1.0;
-            else
-                tu = 0.8;
+                break;
+
+            case 1:
+                disableRadio("btnKillerSwabDate", false);
+
+                switch (getSelectedRadio("btnKillerSwabDate")) {
+                    case 1:
+                        document.getElementById("slDaysToVictimContact").disabled = false;
+                        daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
+                        if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
+                            ((daysToVictimContact >= 3)))
+                            tu = 1.0;
+                        else
+                            tu = 1.1;
+                        break;
+
+                    default:
+                        document.getElementById("slDaysToVictimContact").disabled = true;
+                        tu = 1.1;
+                        break;
+                }
+                break;
+
+            default:
+                disableRadio("btnKillerSwabDate", false);
+
+                switch (getSelectedRadio("btnKillerSwabDate")) {
+                    case 1:
+                        document.getElementById("slDaysToVictimContact").disabled = false;
+                        daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
+                        if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
+                            ((daysToVictimContact >= 3)))
+                            tu = 1.0;
+                        else
+                            tu = 0.8;
+                        break;
+
+                    default:
+                        document.getElementById("slDaysToVictimContact").disabled = true;
+                        tu = 0.8;
+                        break;
+                }
+                break;
         }
 
-        document.getElementsByName("btnKillerHasFever").forEach((btn) => { if (btn.checked) killerHasFever = parseFloat(btn.value); });
-        if (killerHasFever === 1.0) {
+        if (getSelectedRadio("btnKillerHasFever") === 1) {
             document.getElementById("slDaysBetweenContactAndFever").disabled = false;
 
             daysBetweenContactAndFever = 2.0 - document.getElementById("slDaysBetweenContactAndFever").valueAsNumber;
@@ -146,13 +193,13 @@ function update() {
         actorsDistance = document.getElementById("slActorsDistance").valueAsNumber;
         ne = Math.pow(1.0 - actorsDistance / 300.0, 2.0);
 
-        document.getElementsByName("btnPlaceType").forEach((btn) => { if (btn.checked) closedSpace = parseFloat(btn.value); });
+        closedSpace = getSelectedRadio("btnPlaceType");
         fl = ((closedSpace === 1.0) ? 100.0 : 90.0) / 100.0;
 
-        document.getElementsByName("btnKillerShieldType").forEach((btn) => { if (btn.checked) killerShield = parseFloat(btn.value); });
+        killerShield = getSelectedRadio("btnKillerShieldType");
         fi = 1.0 - killerShield / 100.0;
 
-        document.getElementsByName("btnVictimShieldType").forEach((btn) => { if (btn.checked) victimShield = parseFloat(btn.value); });
+        victimShield = getSelectedRadio("btnVictimShieldType");
         fc = 1.0 - victimShield / 100.0;
 
         victimAge = document.getElementById("slVictimAge").valueAsNumber;
@@ -182,9 +229,9 @@ function update() {
 
         L = (mL / 100.0) * 0.1 + 1.0;
 
-        document.getElementsByName("btnIllness1Severity").forEach((btn) => { if (btn.checked) illness1Severity = parseFloat(btn.value); });
-        document.getElementsByName("btnIllness2Severity").forEach((btn) => { if (btn.checked) illness2Severity = parseFloat(btn.value); });
-        document.getElementsByName("btnIllness3Severity").forEach((btn) => { if (btn.checked) illness3Severity = parseFloat(btn.value); });
+        illness1Severity = getSelectedRadio("btnIllness1Severity");
+        illness2Severity = getSelectedRadio("btnIllness2Severity");
+        illness3Severity = getSelectedRadio("btnIllness3Severity");
 
         if (illness1Severity < illness2Severity)
             [illness1Severity, illness2Severity] = [illness2Severity, illness1Severity];
@@ -208,10 +255,16 @@ function update() {
 
     var N = Math.min(100, Math.round(realN * 100.0 / 1.4641));
 
-    var progress = document.querySelector('.progress-done');
-    progress.setAttribute('data-done', N);
-    progress.style.width = progress.getAttribute('data-done') + '%';
-    progress.textContent = progress.getAttribute('data-done') + '%';
+    var progressDone = document.querySelector('.progress-done');
+    progressDone.style.width = N + '%';
+    if (N >= 66.6)
+        progressDone.style.backgroundColor = "red";
+    else if (N >= 33.3)
+        progressDone.style.backgroundColor = "orange";
+    else
+        progressDone.style.backgroundColor = "lightgreen";
+
+    document.querySelector('.progress-value').textContent = N + '%';
 
     var elems = document.querySelectorAll("[data-ck]");
 
@@ -270,11 +323,6 @@ function update() {
 }
 
 function init() {
-    const progress = document.querySelector('.progress-done');
-
-    progress.style.width = progress.getAttribute('data-done') + '%';
-    progress.style.opacity = 1;
-
     var cookieData = document.cookie;
     if ((cookieData !== "") && cookieData.startsWith("konvidCookie")) {
         cookieDict = getDataFromCookie(cookieData.split(";")[0].replace("konvidCookie=", ""));
@@ -292,19 +340,16 @@ function init() {
     update();
 }
 
+/*
 function cookiePopup() {
-    // Get the modal
     var modal = document.getElementById("cookieDialog");
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("acceptButton")[0];
 
     modal.style.display = "block";
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         modal.style.display = "none";
     }
 }
-
+*/
 
