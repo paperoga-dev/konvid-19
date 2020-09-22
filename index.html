@@ -2,10 +2,10 @@
 <html lang="it">
 
 <head>
-    <title>KONVID-19 v0.7</title>
+    <title>KONVID-19 v0.8</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=" cache-control" content="max-age=0, no-cache, no-store, must-revalidate" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
@@ -39,55 +39,70 @@
         <form>
             <fieldset>
                 <legend>Stato di salute dell'untore</legend>
-                <table border="0" summary="" width="100%">
+                <table summary="" width="100%">
                     <tr>
                         <td>
-                            Ha la febbre:
-                        </td>
-                        <td>
-                            <label class="radiocontainer">S&igrave;
-                                <input type="radio" checked="checked" data-ck="khf1" name="btnKillerHasFever" value="1"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">No
-                                <input type="radio" data-ck="khf2" name="btnKillerHasFever" value="0"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Non lo so
-                                <input type="radio" data-ck="khf3" name="btnKillerHasFever" value="0"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            Giorni tra contatto con martire e febbre:
+                            <table summary="" width="100%" class="radio-table">
+                                <tr>
+                                    <td>
+                                        Ha la febbre:
+                                    </td>
+                                    <td>
+                                        <div class="radio-container">
+                                            <input type="radio" data-ck="khf1" name="btnKillerHasFever"
+                                                id="btnKillerHasFeverYes" value="1" onchange="update()" checked>
+                                            <label for="btnKillerHasFeverYes">S&igrave;</label>
+                                            <input type="radio" data-ck="khf2" name="btnKillerHasFever"
+                                                id="btnKillerHasFeverNo" value="0" onchange="update()">
+                                            <label for="btnKillerHasFeverNo">No</label>
+                                            <input type="radio" data-ck="khf3" name="btnKillerHasFever"
+                                                id="btnKillerHasFeverDNK" value="0" onchange="update()">
+                                            <label for="btnKillerHasFeverDNK">Non lo so</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="4">
-                            <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="-14" max="2" value="1" data-ck="dbcaf" class="slider"
-                                        step="1" id="slDaysBetweenContactAndFever" onchange="update()">
-                                    <output id="slDaysBetweenContactAndFeverValue"
-                                        for="slDaysBetweenContactAndFever">0</output>
-                                    <div class="sliderticks">
-                                        <option>-14</option>
-                                        <option>-10</option>
-                                        <option>-6</option>
-                                        <option>-2</option>
-                                        <option>2</option>
-                                    </div>
-                                </form>
-                            </div>
+                    <tr id="rowDaysBetweenContactAndFever">
+                        <td>
+                            <table summary="" width="100%">
+                                <tr>
+                                    <td>
+                                        <table summary="" width="100%"
+                                            style="background-color: #fff2d2; padding: 3px; border-radius: 5px;">
+                                            <tr>
+                                                <td>
+                                                    Quando l'untore ha manifestato la febbre?
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="slidecontainer">
+                                                        <form>
+                                                            <input type="range" min="-14" max="2" value="1"
+                                                                data-ck="dbcaf" class="slider" step="1"
+                                                                id="slDaysBetweenContactAndFever" oninput="update()">
+                                                            <output id="slDaysBetweenContactAndFeverValue"
+                                                                for="slDaysBetweenContactAndFever">0</output>
+                                                            <div class="sliderticks">
+                                                                <option style="font-weight: bold;">14 giorni prima
+                                                                </option>
+                                                                <option style="font-weight: bold;">2 giorni dopo
+                                                                </option>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="slDaysBetweenContactAndFeverText" style="text-align: center;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -96,6 +111,7 @@
 
         <br><br>
 
+        <!--
         <form>
             <fieldset>
                 <legend>Tampone untore</legend>
@@ -103,8 +119,8 @@
                     <tr>
                         <td>
                             <label class="radiocontainer">Negativo
-                                <input type="radio" checked="checked" data-ck="kss1" name="btnKillerSwabState" value="0"
-                                    onchange="update()">
+                                <input type="radio" data-ck="kss1" name="btnKillerSwabState" value="0"
+                                    onchange="update()" checked>
                             </label>
                         </td>
                         <td>
@@ -126,13 +142,13 @@
                     <tr>
                         <td>
                             <label class="radiocontainer">Data tampone sconosciuta
-                                <input type="radio" checked="checked" data-ck="ksd1" name="btnKillerSwabDate" value="0"
-                                    onchange="update()">
+                                <input type="radio" data-ck="ksd1" name="btnKillerSwabDate" value="0"
+                                    onchange="update()" checked>
                             </label>
                         </td>
                         <td>
                             <label class="radiocontainer">Data tampone nota
-                                <input type="radio" checked="checked" data-ck="ksd2" name="btnKillerSwabDate" value="1"
+                                <input type="radio" data-ck="ksd2" name="btnKillerSwabDate" value="1"
                                     onchange="update()">
                             </label>
                         </td>
@@ -150,7 +166,7 @@
                             <div class="slidecontainer">
                                 <form>
                                     <input type="range" min="-15" max="3" value="1" data-ck="dtvc" class="slider"
-                                        step="1" id="slDaysToVictimContact" onchange="update()">
+                                        step="1" id="slDaysToVictimContact" oninput="update()">
                                     <output id="slDaysToVictimContactValue" for="slDaysToVictimContact">0</output>
                                     <div class="sliderticks">
                                         <option>-15</option>
@@ -178,8 +194,8 @@
                     <tr>
                         <td>
                             <label class="radiocontainer">Negativo
-                                <input type="radio" checked="checked" data-ck="vss1" name="btnVictimSwabState" value="0"
-                                    onchange="update()">
+                                <input type="radio" data-ck="vss1" name="btnVictimSwabState" value="0"
+                                    onchange="update()" checked>
                             </label>
                         </td>
                         <td>
@@ -201,13 +217,13 @@
                     <tr>
                         <td>
                             <label class="radiocontainer">Data tampone sconosciuta
-                                <input type="radio" checked="checked" data-ck="vsd1" name="btnVictimSwabDate" value="0"
-                                    onchange="update()">
+                                <input type="radio" data-ck="vsd1" name="btnVictimSwabDate" value="0"
+                                    onchange="update()" checked>
                             </label>
                         </td>
                         <td>
                             <label class="radiocontainer">Data tampone nota
-                                <input type="radio" checked="checked" data-ck="vsd2" name="btnVictimSwabDate" value="1"
+                                <input type="radio" data-ck="vsd2" name="btnVictimSwabDate" value="1"
                                     onchange="update()">
                             </label>
                         </td>
@@ -225,7 +241,7 @@
                             <div class="slidecontainer">
                                 <form>
                                     <input type="range" min="0" max="16" value="1" data-ck="dtkc" class="slider"
-                                        step="1" id="slDaysToKillerContact" onchange="update()">
+                                        step="1" id="slDaysToKillerContact" oninput="update()">
                                     <output id="slDaysToKillerContactValue" for="slDaysToKillerContact">0</output>
                                     <div class="sliderticks">
                                         <option>0</option>
@@ -243,86 +259,133 @@
         </form>
 
         <br><br>
+        -->
 
         <form>
             <fieldset>
                 <legend>Contatto tra martire e untore</legend>
-                <table border="0" summary="" width="100%">
+                <table summary="" width="100%">
                     <tr>
                         <td>
-                            Durata (minuti):
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="0" max="60" value="5" data-ck="cdv" class="slider" step="1"
-                                        id="slContactDuration" onchange="update()">
-                                    <output id="slContactDurationValue" for="slContactDuration">0</output>
-                                    <div class="sliderticks">
-                                        <option>0</option>
-                                        <option>10</option>
-                                        <option>20</option>
-                                        <option>30</option>
-                                        <option>40</option>
-                                        <option>50</option>
-                                        <option>60</option>
-                                    </div>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Distanza (cm):
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="0" max="250" value="100" data-ck="adv" class="slider"
-                                        step="1" id="slActorsDistance" onchange="update()">
-                                    <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
-                                    <div class="sliderticks">
-                                        <option>0</option>
-                                        <option>50</option>
-                                        <option>100</option>
-                                        <option>150</option>
-                                        <option>200</option>
-                                        <option>250</option>
-                                    </div>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Luogo d'incontro:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table border="0" summary="" width="100%">
+                            <table summary="" width="100%"
+                                style="background-color: #e4ffd2; padding: 3px; border-radius: 5px;">
                                 <tr>
                                     <td>
-                                        <label class="radiocontainer">Al chiuso
-                                            <input type="radio" checked="checked" data-ck="pt1" name="btnPlaceType"
-                                                value="1" onchange="update()">
-                                        </label>
+                                        Durata (minuti):
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="slidecontainer">
+                                            <form>
+                                                <input type="range" min="0" max="60" value="5" data-ck="cdv"
+                                                    class="slider" step="1" id="slContactDuration" oninput="update()">
+                                                <output id="slContactDurationValue" for="slContactDuration">0</output>
+                                                <div class="sliderticks">
+                                                    <option>0</option>
+                                                    <option>10</option>
+                                                    <option>20</option>
+                                                    <option>30</option>
+                                                    <option>40</option>
+                                                    <option>50</option>
+                                                    <option>60</option>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="slContactDurationText" style="text-align: center;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="spacer">
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table summary="" width="100%"
+                                style="background-color: #ddeeff; padding: 3px; border-radius: 5px;">
+                                <tr>
+                                    <td>
+                                        Distanza (cm):
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="slidecontainer">
+                                            <form>
+                                                <input type="range" min="0" max="600" value="100" data-ck="adv"
+                                                    class="slider" step="1" id="slActorsDistance" oninput="update()">
+                                                <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
+                                                <div class="sliderticks">
+                                                    <option>0</option>
+                                                    <option>100</option>
+                                                    <option>200</option>
+                                                    <option>300</option>
+                                                    <option>400</option>
+                                                    <option>500</option>
+                                                    <option>600</option>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="slActorsDistanceText" style="text-align: center;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="spacer">
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table summary="" width="100%" class="radio-table">
+                                <tr>
+                                    <td>
+                                        L'untore:
                                     </td>
                                     <td>
-                                        <label class="radiocontainer">All'aperto
-                                            <input type="radio" data-ck="pt2" name="btnPlaceType" value="0"
-                                                onchange="update()">
-                                        </label>
+                                        <div class="radio-container">
+                                            <input type="radio" data-ck="ka1" name="btnKillerAction"
+                                                id="btnKillerActionSpeaks" value="100" onchange="update()" checked>
+                                            <label for="btnKillerActionSpeaks">parla</label>
+                                            <input type="radio" data-ck="ka2" name="btnKillerAction"
+                                                id="btnKillerActionCoughs" value="200" onchange="update()">
+                                            <label for="btnKillerActionCoughs">tossisce</label>
+                                            <input type="radio" data-ck="ka3" name="btnKillerAction"
+                                                id="btnKillerActionSneezes" value="600" onchange="update()">
+                                            <label for="btnKillerActionSneezes">starnutisce</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="spacer">
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table summary="" width="100%" class="radio-table">
+                                <tr>
+                                    <td>
+                                        Luogo d'incontro:
+                                    </td>
+                                    <td>
+                                        <div class="radio-container">
+                                            <input type="radio" data-ck="pt1" name="btnPlaceType"
+                                                id="btnPlaceTypeIndoor" value="1" onchange="update()" checked>
+                                            <label for="btnPlaceTypeIndoor">Al chiuso</label>
+                                            <input type="radio" data-ck="pt2" name="btnPlaceType"
+                                                id="btnPlaceTypeOutdoor" value="0" onchange="update()">
+                                            <label for="btnPlaceTypeOutdoor">All'aperto</label>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -338,54 +401,29 @@
                     </tr>
                     <tr>
                         <td>
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">Nessuno
-                                            <input type="radio" checked="checked" data-ck="kst1"
-                                                name="btnKillerShieldType" value="0" onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Sciarpa
-                                            <input type="radio" data-ck="kst2" name="btnKillerShieldType" value="40"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Chirurgica
-                                            <input type="radio" data-ck="kst3" name="btnKillerShieldType" value="50"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">FPP2
-                                            <input type="radio" data-ck="kst4" name="btnKillerShieldType" value="95"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP2 con valvola
-                                            <input type="radio" data-ck="kst5" name="btnKillerShieldType" value="30"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP3
-                                            <input type="radio" data-ck="kst6" name="btnKillerShieldType" value="98"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP3 con valvola
-                                            <input type="radio" data-ck="kst7" name="btnKillerShieldType" value="30"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="radio-container">
+                                <input type="radio" data-ck="kst1" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeNone" value="0" onchange="update()" checked>
+                                <label for="btnKillerShieldTypeNone">Nessuno</label>
+                                <input type="radio" data-ck="kst2" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeScarf" value="40" onchange="update()">
+                                <label for="btnKillerShieldTypeScarf">Sciarpa</label>
+                                <input type="radio" data-ck="kst3" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeSurgical" value="50" onchange="update()">
+                                <label for="btnKillerShieldTypeSurgical">Chirurgica</label>
+                                <input type="radio" data-ck="kst4" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeFPP2" value="95" onchange="update()">
+                                <label for="btnKillerShieldTypeFPP2">FPP2</label>
+                                <input type="radio" data-ck="kst5" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeValvedFPP2" value="30" onchange="update()">
+                                <label for="btnKillerShieldTypeValvedFPP2">FPP2 con valvola</label>
+                                <input type="radio" data-ck="kst6" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeFPP3" value="98" onchange="update()">
+                                <label for="btnKillerShieldTypeFPP3">FPP3</label>
+                                <input type="radio" data-ck="kst7" name="btnKillerShieldType"
+                                    id="btnKillerShieldTypeValvedFPP3" value="30" onchange="update()">
+                                <label for="btnKillerShieldTypeValvedFPP3">FPP3 con valvola</label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="spacer">
@@ -398,54 +436,29 @@
                     </tr>
                     <tr>
                         <td>
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">Nessuno
-                                            <input type="radio" checked="checked" data-ck="vst1"
-                                                name="btnVictimShieldType" value="0" onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Sciarpa
-                                            <input type="radio" data-ck="vst2" name="btnVictimShieldType" value="10"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Chirurgica
-                                            <input type="radio" data-ck="vst3" name="btnVictimShieldType" value="20"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">FPP2
-                                            <input type="radio" data-ck="vst4" name="btnVictimShieldType" value="95"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP2 con valvola
-                                            <input type="radio" data-ck="vst5" name="btnVictimShieldType" value="95"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP3
-                                            <input type="radio" data-ck="vst6" name="btnVictimShieldType" value="98"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">FPP3 con valvola
-                                            <input type="radio" data-ck="vst7" name="btnVictimShieldType" value="98"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="radio-container">
+                                <input type="radio" data-ck="vst1" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeNone" value="0" onchange="update()" checked>
+                                <label for="btnVictimShieldTypeNone">Nessuno</label>
+                                <input type="radio" data-ck="vst2" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeScarf" value="10" onchange="update()">
+                                <label for="btnVictimShieldTypeScarf">Sciarpa</label>
+                                <input type="radio" data-ck="vst3" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeSurgical" value="20" onchange="update()">
+                                <label for="btnVictimShieldTypeSurgical">Chirurgica</label>
+                                <input type="radio" data-ck="vst4" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeFPP2" value="95" onchange="update()">
+                                <label for="btnVictimShieldTypeFPP2">FPP2</label>
+                                <input type="radio" data-ck="vst5" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeValvedFPP2" value="95" onchange="update()">
+                                <label for="btnVictimShieldTypeValvedFPP2">FPP2 con valvola</label>
+                                <input type="radio" data-ck="vst6" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeFPP3" value="98" onchange="update()">
+                                <label for="btnVictimShieldTypeFPP3">FPP3</label>
+                                <input type="radio" data-ck="vst7" name="btnVictimShieldType"
+                                    id="btnVictimShieldTypeValvedFPP3" value="98" onchange="update()">
+                                <label for="btnVictimShieldTypeValvedFPP3">FPP3 con valvola</label>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -456,8 +469,8 @@
 
         <form>
             <fieldset>
-                <legend>Stato di salute del martire</legend>
-                <table border="0" summary="" width="100%">
+                <legend>Anagrafica del martire</legend>
+                <table summary="" width="100%">
                     <tr>
                         <td>
                             Et&agrave;:
@@ -468,7 +481,7 @@
                             <div class="slidecontainer">
                                 <form>
                                     <input type="range" min="0" max="100" value="40" data-ck="vav" class="slider"
-                                        step="1" id="slVictimAge" onchange="update()">
+                                        step="1" id="slVictimAge" oninput="update()">
                                     <output id="slVictimAgeValue" for="slVictimAge">0</output>
                                     <div class="sliderticks">
                                         <option>0</option>
@@ -482,112 +495,12 @@
                             </div>
                         </td>
                     </tr>
-
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Severit&agrave; patologia 1:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">Nessuna
-                                            <input type="radio" checked="checked" data-ck="i1s1"
-                                                name="btnIllness1Severity" value="0" onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Media
-                                            <input type="radio" data-ck="i1s2" name="btnIllness1Severity" value="30"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Grave
-                                            <input type="radio" data-ck="i1s3" name="btnIllness1Severity" value="50"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Severit&agrave; patologia 2:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">Nessuna
-                                            <input type="radio" checked="checked" data-ck="i2s1"
-                                                name="btnIllness2Severity" value="0" onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Media
-                                            <input type="radio" data-ck="i2s2" name="btnIllness2Severity" value="30"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Grave
-                                            <input type="radio" data-ck="i2s3" name="btnIllness2Severity" value="50"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Severit&agrave; patologia 3:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label class="radiocontainer">Nessuna
-                                            <input type="radio" checked="checked" data-ck="i3s1"
-                                                name="btnIllness3Severity" value="0" onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Media
-                                            <input type="radio" data-ck="i3s2" name="btnIllness3Severity" value="30"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="radiocontainer">Grave
-                                            <input type="radio" data-ck="i3s3" name="btnIllness3Severity" value="50"
-                                                onchange="update()">
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
                 </table>
             </fieldset>
         </form>
     </div>
-    <p id="debug">
-    </p>
+    <div id="debug">
+    </div>
 
     <div class="fixed-footer">
         <h2>
