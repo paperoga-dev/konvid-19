@@ -64,9 +64,47 @@ function checkOneIfUnchecked(radios) {
     radios[0].checked = true;
 }
 
+function factorial(num) {
+    return (num === 0)? 1 : (num * factorial(num - 1));
+}
+
+function extendedFactorial(x) {
+  /* This function implements x! for negative x values too.
+   *
+   * As this requires the implementation of the Gamma and Pi Functions, and they are quite expensive, this code
+   * just hard-codes them for some values, and falls back to a standard equivalent in some other cases.
+   *
+   * In detail: */
+
+  /* when x -> -1 (right), we have (-1)! -> +inf. Just return a very high positive value */
+  if (x === -1)
+      return 1E+100;
+
+  /* when x = -0.5 we have sqrt(PI), according to https://en.wikipedia.org/wiki/Factorial */
+  else if (x === -0.5)
+      return Math.sqrt(Math.PI);
+
+  /* when x is integer, just compute the factorial */
+  else if (x === Math.trunc(x))
+      return factorial(x);
+
+  /* According to Gamma, we have that (n - 0.5)! = Gamma(n + 1.5).
+   * We need to correct x, to pretend that we're calculating (-1/2 + n)!, so, for example, if we need to calculate 0.5!, we calculate
+   * Gamma(1.5), i.e Gamma(1 + 0.5) */
+  else {
+      var n = Math.trunc(x + 0.5);
+      return factorial(2 * n - 1) / (Math.pow(2, 2 * n - 1) * factorial(n - 1)) * Math.sqrt(Math.PI);
+  }
+}
 
 function calculateR(hasFever, daysBetweenContactAndFever) {
-    return (hasFever) ? Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805 : 0.5;
+    if (hasFever === 0)
+        return 0.5;
+    else if (hasFever === 2)
+        return 0.75;
+    else
+        // return Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805;
+    return Math.pow(1.05, daysBetweenContactAndFever / 2.0 - 1.0) / (extendedFactorial(daysBetweenContactAndFever / 2.0 - 1.0) * Math.exp(1.05)) / 0.404614;
 }
 
 function calculateFP(duration) {
@@ -178,7 +216,7 @@ function update() {
 
     var maxD = getSelectedRadio("btnKillerAction");
 
-    var maxValue = calculateR(true, 8.0) *
+    var maxValue = calculateR(1, 3.0) *
         calculateFP(60.0) *
         calculateNE(0.0, maxD) *
         calculateFL(true, 0.0, maxD) *
@@ -280,11 +318,11 @@ function update() {
          */
         tu = 1.0;
 
-        var hasFever = getSelectedRadio("btnKillerHasFever") === 1;
+        var hasFever = getSelectedRadio("btnKillerHasFever");
         daysBetweenContactAndFever = document.getElementById("slDaysBetweenContactAndFever").valueAsNumber;
-        R = calculateR(hasFever, 2.0 - daysBetweenContactAndFever);
-        document.getElementById("rowDaysBetweenContactAndFever").setAttribute("class", (hasFever) ? "" : "row_hidden");
-        document.getElementById("rowDaysBetweenContactAndFever").setAttribute("className", (hasFever) ? "" : "row_hidden");
+        R = calculateR(hasFever, 3.0 - daysBetweenContactAndFever);
+        document.getElementById("rowDaysBetweenContactAndFever").setAttribute("class", (hasFever === 1) ? "" : "row_hidden");
+        document.getElementById("rowDaysBetweenContactAndFever").setAttribute("className", (hasFever === 1) ? "" : "row_hidden");
 
         var slText = document.getElementById("slDaysBetweenContactAndFeverText");
         if (daysBetweenContactAndFever < -1) {

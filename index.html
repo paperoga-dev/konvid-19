@@ -10,6 +10,7 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
     <script src="konvid.js"></script>
 </head>
 
@@ -35,7 +36,7 @@
                                                 id="btnKillerHasFeverNo" value="0" onchange="update()">
                                             <label for="btnKillerHasFeverNo">No</label>
                                             <input type="radio" data-ck="khf3" name="btnKillerHasFever"
-                                                id="btnKillerHasFeverDNK" value="0" onchange="update()">
+                                                id="btnKillerHasFeverDNK" value="2" onchange="update()">
                                             <label for="btnKillerHasFeverDNK">Non lo so</label>
                                         </div>
                                     </td>
@@ -59,15 +60,15 @@
                                                 <td>
                                                     <div class="slidecontainer">
                                                         <form>
-                                                            <input type="range" min="-14" max="2" value="1"
+                                                            <input type="range" min="-9" max="3" value="1"
                                                                 data-ck="dbcaf" class="slider" step="1"
                                                                 id="slDaysBetweenContactAndFever" oninput="update()">
                                                             <output id="slDaysBetweenContactAndFeverValue"
                                                                 for="slDaysBetweenContactAndFever">0</output>
                                                             <div class="sliderticks">
-                                                                <option style="font-weight: bold;">14 giorni prima
+                                                                <option style="font-weight: bold;">9 giorni prima
                                                                 </option>
-                                                                <option style="font-weight: bold;">2 giorni dopo
+                                                                <option style="font-weight: bold;">3 giorni dopo
                                                                 </option>
                                                             </div>
                                                         </form>
