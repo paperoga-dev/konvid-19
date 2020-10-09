@@ -65,36 +65,36 @@ function checkOneIfUnchecked(radios) {
 }
 
 function factorial(num) {
-    return (num === 0)? 1 : (num * factorial(num - 1));
+    return (num === 0) ? 1 : (num * factorial(num - 1));
 }
 
 function extendedFactorial(x) {
-  /* This function implements x! for negative x values too.
-   *
-   * As this requires the implementation of the Gamma and Pi Functions, and they are quite expensive, this code
-   * just hard-codes them for some values, and falls back to a standard equivalent in some other cases.
-   *
-   * In detail: */
+    /* This function implements x! for negative x values too.
+     *
+     * As this requires the implementation of the Gamma and Pi Functions, and they are quite expensive, this code
+     * just hard-codes them for some values, and falls back to a standard equivalent in some other cases.
+     *
+     * In detail: */
 
-  /* when x -> -1 (right), we have (-1)! -> +inf. Just return a very high positive value */
-  if (x === -1)
-      return 1E+100;
+    /* when x -> -1 (right), we have (-1)! -> +inf. Just return a very high positive value */
+    if (x === -1)
+        return 1E+100;
 
-  /* when x = -0.5 we have sqrt(PI), according to https://en.wikipedia.org/wiki/Factorial */
-  else if (x === -0.5)
-      return Math.sqrt(Math.PI);
+    /* when x = -0.5 we have sqrt(PI), according to https://en.wikipedia.org/wiki/Factorial */
+    else if (x === -0.5)
+        return Math.sqrt(Math.PI);
 
-  /* when x is integer, just compute the factorial */
-  else if (x === Math.trunc(x))
-      return factorial(x);
+    /* when x is integer, just compute the factorial */
+    else if (x === Math.trunc(x))
+        return factorial(x);
 
-  /* According to Gamma, we have that (n - 0.5)! = Gamma(n + 1.5).
-   * We need to correct x, to pretend that we're calculating (-1/2 + n)!, so, for example, if we need to calculate 0.5!, we calculate
-   * Gamma(1.5), i.e Gamma(1 + 0.5) */
-  else {
-      var n = Math.trunc(x + 0.5);
-      return factorial(2 * n - 1) / (Math.pow(2, 2 * n - 1) * factorial(n - 1)) * Math.sqrt(Math.PI);
-  }
+    /* According to Gamma, we have that (n - 0.5)! = Gamma(n + 1.5).
+     * We need to correct x, to pretend that we're calculating (-1/2 + n)!, so, for example, if we need to calculate 0.5!, we calculate
+     * Gamma(1.5), i.e Gamma(1 + 0.5) */
+    else {
+        var n = Math.trunc(x + 0.5);
+        return factorial(2 * n - 1) / (Math.pow(2, 2 * n - 1) * factorial(n - 1)) * Math.sqrt(Math.PI);
+    }
 }
 
 function calculateR(hasFever, daysBetweenContactAndFever) {
@@ -104,7 +104,7 @@ function calculateR(hasFever, daysBetweenContactAndFever) {
         return 0.75;
     else
         // return Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805;
-    return Math.pow(1.05, daysBetweenContactAndFever / 2.0 - 1.0) / (extendedFactorial(daysBetweenContactAndFever / 2.0 - 1.0) * Math.exp(1.05)) / 0.404614;
+        return Math.pow(1.05, daysBetweenContactAndFever / 2.0 - 1.0) / (extendedFactorial(daysBetweenContactAndFever / 2.0 - 1.0) * Math.exp(1.05)) / 0.404614;
 }
 
 function calculateFP(duration) {
@@ -153,25 +153,6 @@ function calculateL(age) {
     return (mL / 100.0) * 0.1 + 1.0;
 }
 
-/*
-function calculateIllness(I1, I2, I3) {
-    if (I1 < I2)
-        [I1, I2] = [I2, I1];
-
-    if (I1 < I3)
-        [I1, I3] = [I3, I1];
-
-    if (I2 < I3)
-        [I2, I3] = [I3, I2];
-
-    var P1 = ((I1 / 100.0) + 1.0);
-    var P2 = ((I2 / 200.0) + 1.0);
-    var P3 = ((I3 / 400.0) + 1.0);
-
-    return [P1, P2, P3, (((((P1 * P2 * P3) - 1.0) / ((1.5 * 1.25 * 1.125) - 1.0)) * 0.1) + 1.0)];
-}
-*/
-
 function update() {
     var tm = null;
     var daysToKillerContact = null;
@@ -200,18 +181,6 @@ function update() {
     var victimAge = null;
     var L = null;
 
-    /*
-    var illness1Severity = null;
-    var illness2Severity = null;
-    var illness3Severity = null;
-
-    var P1 = null;
-    var P2 = null;
-    var P3 = null;
-
-    var P = null;
-    */
-
     var realN = null;
 
     var maxD = getSelectedRadio("btnKillerAction");
@@ -222,8 +191,7 @@ function update() {
         calculateFL(true, 0.0, maxD) *
         calculateShieldFactor(0.0) *
         calculateShieldFactor(0.0) *
-        calculateL(100.0) /* *
-        calculateIllness(50.0, 50.0, 50.0)[3] */;
+        calculateL(100.0);
 
     try {
         /*
@@ -342,21 +310,21 @@ function update() {
 
         slText = document.getElementById("slContactDurationText");
         if (contactDuration > 50) {
-            slText.innerHTML = "guardare una puntata di Masterchef senza pubblicità";
+            slText.innerHTML = "trovare un parcheggio sotto casa";
         } else if (contactDuration > 40) {
-            slText.innerHTML = "trovare un negozio che venda viti da 5,23 mm";
+            slText.innerHTML = "rapporto sessuale su YouPorn";
         } else if (contactDuration > 30) {
-            slText.innerHTML = "farsi barba e capelli";
+            slText.innerHTML = "antivax che ti spiega del mercurio nei vaccini";
         } else if (contactDuration > 20) {
-            slText.innerHTML = "telefonare alla mamma";
+            slText.innerHTML = "cottura al microonde di lasagne congelate";
         } else if (contactDuration > 10) {
-            slText.innerHTML = "usare questo tool";
+            slText.innerHTML = "durata di una pubblicit&agrave; Mediaset";
         } else if (contactDuration > 5) {
-            slText.innerHTML = "prendere un caffè con la macchina in seconda fila";
+            slText.innerHTML = "ricordarti dove hai messo la mascherina";
         } else if (contactDuration > 2) {
-            slText.innerHTML = "scrivere una cagata su Tumblr";
+            slText.innerHTML = "rapporto sessuale di un maschio medio";
         } else {
-            slText.innerHTML = "cambiare l'acqua";
+            slText.innerHTML = "vedere l'ex da lontano e fuggire";
         }
 
         var aD = document.getElementById("slActorsDistance").valueAsNumber;
@@ -365,21 +333,21 @@ function update() {
 
         slText = document.getElementById("slActorsDistanceText");
         if (aD > 500) {
-            slText.innerHTML = "incontrato al supermercato";
+            slText.innerHTML = "incrociare il proprio capo";
         } else if (aD > 400) {
-            slText.innerHTML = "ammiccare al ristorante";
+            slText.innerHTML = "incrociare punkabbestia sotto ketamina con pitbull ringhiante";
         } else if (aD > 300) {
-            slText.innerHTML = "discussione col vicino";
+            slText.innerHTML = "dirimpettaia che parla male della portinaia";
         } else if (aD > 200) {
-            slText.innerHTML = "chiacchiera al bar";
+            slText.innerHTML = "mi scusi... crede nella vita dopo la morte?";
         } else if (aD > 100) {
-            slText.innerHTML = "inciucio tra colleghi";
+            slText.innerHTML = "mi fai questa fotocopia?";
         } else if (aD > 50) {
-            slText.innerHTML = "vicino sconosciuto di tavolo al matrimonio";
+            slText.innerHTML = "sgomitatore in metropolitana";
         } else if (aD > 10) {
-            slText.innerHTML = "ce sto a prova'";
+            slText.innerHTML = "strizzargli un punto nero sul naso";
         } else {
-            slText.innerHTML = "limonare di brutto";
+            slText.innerHTML = "giochiamo ad annoda-lingue?";
         }
 
         closedSpace = getSelectedRadio("btnPlaceType");
@@ -394,25 +362,12 @@ function update() {
         victimAge = document.getElementById("slVictimAge").valueAsNumber;
         L = calculateL(victimAge);
 
-        /*
-        illness1Severity = getSelectedRadio("btnIllness1Severity");
-        illness2Severity = getSelectedRadio("btnIllness2Severity");
-        illness3Severity = getSelectedRadio("btnIllness3Severity");
-
-        var pValues = calculateIllness(illness1Severity, illness2Severity, illness3Severity);
-
-        P1 = pValues[0];
-        P2 = pValues[1];
-        P3 = pValues[2];
-        P = pValues[3];
-        */
-
         realN = R * tu * tm * fp * ne * fl * fi * fc * L /* P */;
     } catch (exc) {
         realN = maxValue;
     }
 
-    var N = Math.max(10.0, Math.min(100.0, Math.round(realN * 100.0 / maxValue)));
+    var N = Math.max((((killerShield === 0.0) || (victimShield === 0.0)) && (actorsDistance < 100)) ? 10.0 : 1.0, Math.min(100.0, Math.round(realN * 100.0 / maxValue)));
 
     var progressDone = document.querySelector('.progress-done');
     progressDone.style.width = N + '%';
@@ -469,15 +424,6 @@ function update() {
             "tu = " + tu + "<br><br>" +
             "daysToKillerContact = " + daysToKillerContact + "<br>" +
             "tm = " + tm + "<br><br>" +
-            /*
-            "illness1Severity = " + illness1Severity + "<br>" +
-            "P1 = " + P1 + "<br><br>" +
-            "illness2Severity = " + illness2Severity + "<br>" +
-            "P2 = " + P2 + "<br><br>" +
-            "illness3Severity = " + illness3Severity + "<br>" +
-            "P3 = " + P3 + "<br><br>" +
-            "P = " + P + "<br><br>" +
-            */
             "maxValue = " + maxValue + "<br>" +
             "realN = " + realN;
     }
@@ -519,17 +465,3 @@ function init() {
 
     update();
 }
-
-/*
-function cookiePopup() {
-    var modal = document.getElementById("cookieDialog");
-    var span = document.getElementsByClassName("acceptButton")[0];
-
-    modal.style.display = "block";
-
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-}
-*/
-
