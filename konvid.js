@@ -1,23 +1,23 @@
 'use strict';
 
-var cookieVersion = 1;
-var cookieDict = {};
+let cookieVersion = 1;
+let cookieDict = {};
 
 function setCookie(cookieData, exdays) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
+    let expires = "expires=" + d.toUTCString();
     document.cookie = "konvidCookie=" + cookieData + ";  expires=" + expires + "; path=/";
 }
 
 function getDataFromCookie(cookieData) {
-    var pairs = cookieData.split("|");
+    let pairs = cookieData.split("|");
 
-    var dict = {};
+    let dict = {};
 
     pairs.forEach(cookiePair => {
-        var values = cookiePair.trim().split(">");
-        var key = values[0];
+        let values = cookiePair.trim().split(">");
+        let key = values[0];
         if ((key != "version") && (key != "expires") && (key != "path"))
             if ((values[1] === "true") || (values[1] === "false"))
                 dict[key] = values[1] === "true";
@@ -29,11 +29,11 @@ function getDataFromCookie(cookieData) {
 }
 
 function createDataForCookie(dataDict) {
-    var list = [];
+    let list = [];
 
     list.push("version>" + cookieVersion);
 
-    for (var key in dataDict) {
+    for (let key in dataDict) {
         list.push(key + ">" + dataDict[key]);
     }
 
@@ -41,7 +41,7 @@ function createDataForCookie(dataDict) {
 }
 
 function getSelectedRadio(radioName) {
-    var radioValue = null;
+    let radioValue = null;
     document.getElementsByName(radioName).forEach((btn) => { if (btn.checked) radioValue = parseInt(btn.value); });
     return radioValue;
 }
@@ -55,7 +55,7 @@ function checkOneIfUnchecked(radios) {
         return;
     }
 
-    for (var i = 0; i < radios.length; ++i) {
+    for (let i = 0; i < radios.length; ++i) {
         if (radios[i].checked) {
             return;
         }
@@ -92,7 +92,7 @@ function extendedFactorial(x) {
      * We need to correct x, to pretend that we're calculating (-1/2 + n)!, so, for example, if we need to calculate 0.5!, we calculate
      * Gamma(1.5), i.e Gamma(1 + 0.5) */
     else {
-        var n = Math.trunc(x + 0.5);
+        let n = Math.trunc(x + 0.5);
         return factorial(2 * n - 1) / (Math.pow(2, 2 * n - 1) * factorial(n - 1)) * Math.sqrt(Math.PI);
     }
 }
@@ -116,7 +116,7 @@ function calculateNE(distance, maxRange) {
 }
 
 function calculateFL(closedSpace, distance, maxRange) {
-    var dd = (closedSpace) ? 0.0 : Math.min(distance, maxRange);
+    let dd = (closedSpace) ? 0.0 : Math.min(distance, maxRange);
 
     return 1.0 - ((Math.pow(dd / maxRange, 3.0) + dd / maxRange) / 2.0) * 0.5;
 }
@@ -126,7 +126,7 @@ function calculateShieldFactor(shield) {
 }
 
 function calculateL(age) {
-    var mL = null;
+    let mL = null;
     if ((age >= 0) && (age < 10))
         mL = 0.0;
     else if ((age >= 10) && (age < 20))
@@ -154,38 +154,38 @@ function calculateL(age) {
 }
 
 function update() {
-    var tm = null;
-    var daysToKillerContact = null;
+    let tm = null;
+    let daysToKillerContact = null;
 
-    var tu = null;
-    var daysToVictimContact = null;
+    let tu = null;
+    let daysToVictimContact = null;
 
-    var R = null;
-    var daysBetweenContactAndFever = null;
+    let R = null;
+    let daysBetweenContactAndFever = null;
 
-    var contactDuration = null;
-    var fp = null;
+    let contactDuration = null;
+    let fp = null;
 
-    var actorsDistance = null;
-    var ne = null;
+    let actorsDistance = null;
+    let ne = null;
 
-    var closedSpace = null;
-    var fl = null;
+    let closedSpace = null;
+    let fl = null;
 
-    var killerShield = null;
-    var fi = null;
+    let killerShield = null;
+    let fi = null;
 
-    var victimShield = null;
-    var fc = null;
+    let victimShield = null;
+    let fc = null;
 
-    var victimAge = null;
-    var L = null;
+    let victimAge = null;
+    let L = null;
 
-    var realN = null;
+    let realN = null;
 
-    var maxD = getSelectedRadio("btnKillerAction");
+    let maxD = getSelectedRadio("btnKillerAction");
 
-    var maxValue = calculateR(1, 3.0) *
+    let maxValue = calculateR(1, 3.0) *
         calculateFP(60.0) *
         calculateNE(0.0, maxD) *
         calculateFL(true, 0.0, maxD) *
@@ -194,105 +194,16 @@ function update() {
         calculateL(100.0);
 
     try {
-        /*
-        switch (getSelectedRadio("btnVictimSwabState")) {
-            case 2:
-                document.getElementById("slDaysToKillerContact").disabled = true;
-                disableRadio("btnVictimSwabDate", true);
-
-                tm = 1.0;
-                break;
-
-            case 1:
-                document.getElementById("slDaysToKillerContact").disabled = true;
-                disableRadio("btnVictimSwabDate", true);
-
-                throw 0;
-
-            default:
-                disableRadio("btnVictimSwabDate", false);
-
-                switch (getSelectedRadio("btnVictimSwabDate")) {
-                    case 1:
-                        document.getElementById("slDaysToKillerContact").disabled = false;
-                        daysToKillerContact = document.getElementById("slDaysToKillerContact").valueAsNumber;
-                        if ((daysToKillerContact >= 0) && (daysToKillerContact <= 3))
-                            tm = 1.0;
-                        else
-                            tm = 0.3;
-                        break;
-
-                    default:
-                        document.getElementById("slDaysToKillerContact").disabled = true;
-                        tm = 0.3;
-                        break;
-                }
-                break;
-        }
-        */
         tm = 1.0;
-
-        /*
-         switch (getSelectedRadio("btnKillerSwabState")) {
-             case 2:
-                 document.getElementById("slDaysToVictimContact").disabled = true;
-                 disableRadio("btnKillerSwabDate", true);
-
-                 tu = 1.0;
-                 break;
-
-             case 1:
-                 disableRadio("btnKillerSwabDate", false);
-
-                 switch (getSelectedRadio("btnKillerSwabDate")) {
-                     case 1:
-                         document.getElementById("slDaysToVictimContact").disabled = false;
-                         daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
-                         if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
-                             ((daysToVictimContact >= 3)))
-                             tu = 1.0;
-                         else
-                             tu = 1.1;
-                         break;
-
-                     default:
-                         document.getElementById("slDaysToVictimContact").disabled = true;
-                         tu = 1.1;
-                         break;
-                 }
-                 break;
-
-             default:
-                 disableRadio("btnKillerSwabDate", false);
-
-                 switch (getSelectedRadio("btnKillerSwabDate")) {
-                     case 1:
-                         document.getElementById("slDaysToVictimContact").disabled = false;
-                         daysToVictimContact = document.getElementById("slDaysToVictimContact").valueAsNumber;
-                         if (((daysToVictimContact >= -15) && (daysToVictimContact <= -12)) ||
-                             ((daysToVictimContact >= 3)))
-                             tu = 1.0;
-                         else
-                             tu = 0.8;
-                         break;
-
-                     default:
-                         document.getElementById("slDaysToVictimContact").disabled = true;
-                         tu = 0.8;
-                         break;
-                 }
-                 break;
-         }
-         */
         tu = 1.0;
 
-        var hasFever = getSelectedRadio("btnKillerHasFever");
+        let hasFever = getSelectedRadio("btnKillerHasFever");
         daysBetweenContactAndFever = document.getElementById("slDaysBetweenContactAndFever").valueAsNumber;
         R = calculateR(hasFever, 3.0 - daysBetweenContactAndFever);
         document.getElementById("rowDaysBetweenContactAndFever").setAttribute("class", (hasFever === 1) ? "" : "row_hidden");
         document.getElementById("rowDaysBetweenContactAndFever").setAttribute("className", (hasFever === 1) ? "" : "row_hidden");
 
-        var slText = document.getElementById("slDaysBetweenContactAndFeverText");
+        let slText = document.getElementById("slDaysBetweenContactAndFeverText");
         if (daysBetweenContactAndFever < -1) {
             slText.innerHTML = -daysBetweenContactAndFever + " giorni <b>prima</b> del contatto";
         } else if (daysBetweenContactAndFever === -1) {
@@ -309,45 +220,47 @@ function update() {
         fp = calculateFP(contactDuration);
 
         slText = document.getElementById("slContactDurationText");
+        slText.innerHTML = contactDuration + " minut" + ((contactDuration == 1) ? "o" : "i") + " = ";
         if (contactDuration > 50) {
-            slText.innerHTML = "trovare un parcheggio sotto casa";
+            slText.innerHTML += "trovare un parcheggio sotto casa";
         } else if (contactDuration > 40) {
-            slText.innerHTML = "rapporto sessuale su YouPorn";
+            slText.innerHTML += "rapporto sessuale su YouPorn";
         } else if (contactDuration > 30) {
-            slText.innerHTML = "antivax che ti spiega del mercurio nei vaccini";
+            slText.innerHTML += "antivax che ti spiega del mercurio nei vaccini";
         } else if (contactDuration > 20) {
-            slText.innerHTML = "cottura al microonde di lasagne congelate";
+            slText.innerHTML += "cottura al microonde di lasagne congelate";
         } else if (contactDuration > 10) {
-            slText.innerHTML = "durata di una pubblicit&agrave; Mediaset";
+            slText.innerHTML += "durata di una pubblicit&agrave; Mediaset";
         } else if (contactDuration > 5) {
-            slText.innerHTML = "ricordarti dove hai messo la mascherina";
+            slText.innerHTML += "ricordarti dove hai messo la mascherina";
         } else if (contactDuration > 2) {
-            slText.innerHTML = "rapporto sessuale di un maschio medio";
+            slText.innerHTML += "rapporto sessuale di un maschio medio";
         } else {
-            slText.innerHTML = "vedere l'ex da lontano e fuggire";
+            slText.innerHTML += "vedere l'ex da lontano e fuggire";
         }
 
-        var aD = document.getElementById("slActorsDistance").valueAsNumber;
+        let aD = document.getElementById("slActorsDistance").valueAsNumber;
         actorsDistance = Math.min(aD, maxD);
         ne = calculateNE(actorsDistance, maxD);
 
         slText = document.getElementById("slActorsDistanceText");
+        slText.innerHTML = aD + " centimetr" + ((aD == 1) ? "o" : "i") + " = ";
         if (aD > 500) {
-            slText.innerHTML = "incrociare il proprio capo";
+            slText.innerHTML += "incrociare il proprio capo";
         } else if (aD > 400) {
-            slText.innerHTML = "incrociare punkabbestia sotto ketamina con pitbull ringhiante";
+            slText.innerHTML += "incrociare punkabbestia sotto ketamina con pitbull ringhiante";
         } else if (aD > 300) {
-            slText.innerHTML = "dirimpettaia che parla male della portinaia";
+            slText.innerHTML += "dirimpettaia che parla male della portinaia";
         } else if (aD > 200) {
-            slText.innerHTML = "mi scusi... crede nella vita dopo la morte?";
+            slText.innerHTML += "mi scusi... crede nella vita dopo la morte?";
         } else if (aD > 100) {
-            slText.innerHTML = "mi fai questa fotocopia?";
+            slText.innerHTML += "mi fai questa fotocopia?";
         } else if (aD > 50) {
-            slText.innerHTML = "sgomitatore in metropolitana";
+            slText.innerHTML += "sgomitatore in metropolitana";
         } else if (aD > 10) {
-            slText.innerHTML = "strizzargli un punto nero sul naso";
+            slText.innerHTML += "strizzargli un punto nero sul naso";
         } else {
-            slText.innerHTML = "giochiamo ad annoda-lingue?";
+            slText.innerHTML += "giochiamo ad annoda-lingue?";
         }
 
         closedSpace = getSelectedRadio("btnPlaceType");
@@ -362,14 +275,17 @@ function update() {
         victimAge = document.getElementById("slVictimAge").valueAsNumber;
         L = calculateL(victimAge);
 
+        slText = document.getElementById("slVictimAgeText");
+        slText.innerHTML = victimAge + " ann" + ((victimAge == 1) ? "o" : "i");
+
         realN = R * tu * tm * fp * ne * fl * fi * fc * L /* P */;
     } catch (exc) {
         realN = maxValue;
     }
 
-    var N = Math.max((((killerShield === 0.0) || (victimShield === 0.0)) && (actorsDistance < 100)) ? 10.0 : 1.0, Math.min(100.0, Math.round(realN * 100.0 / maxValue)));
+    let N = Math.max((((killerShield === 0.0) || (victimShield === 0.0)) && (actorsDistance < 100)) ? 10.0 : 1.0, Math.min(100.0, Math.round(realN * 100.0 / maxValue)));
 
-    var progressDone = document.querySelector('.progress-done');
+    let progressDone = document.querySelector('.progress-done');
     progressDone.style.width = N + '%';
     if (N >= 66.6)
         progressDone.style.backgroundColor = "red";
@@ -378,14 +294,14 @@ function update() {
     else
         progressDone.style.backgroundColor = "lightgreen";
 
-    var isDebug = window.location.search.endsWith("?debug");
+    let isDebug = window.location.search.endsWith("?debug");
 
     if (isDebug)
         document.querySelector('.progress-value').textContent = N + '%';
     else
         document.querySelector('.progress-value').textContent = '';
 
-    var elems = document.querySelectorAll("[data-ck]");
+    let elems = document.querySelectorAll("[data-ck]");
 
     cookieDict = {}
     elems.forEach(elem => {
@@ -428,16 +344,16 @@ function update() {
             "realN = " + realN;
     }
 
-    var slElems = document.querySelectorAll('input[type="range"], input[type="range"][list]');
+    let slElems = document.querySelectorAll('input[type="range"], input[type="range"][list]');
     slElems.forEach(slElem => {
-        var outputElement = document.getElementById(slElem.id + "Value");
+        let outputElement = document.getElementById(slElem.id + "Value");
         outputElement.value = slElem.valueAsNumber;
         outputElement.style.display = (isDebug) ? "inline" : "none";
     });
 }
 
 function init() {
-    var cookieData = document.cookie;
+    let cookieData = document.cookie;
     if (cookieData !== "") {
         cookieData.split(';').forEach(cookieElem => {
             cookieElem = cookieElem.trim();
@@ -446,7 +362,7 @@ function init() {
 
             cookieDict = getDataFromCookie(cookieElem.replace("konvidCookie=", ""));
 
-            var elems = document.querySelectorAll("[data-ck]");
+            let elems = document.querySelectorAll("[data-ck]");
 
             elems.forEach(elem => {
                 if ((elem.type === "checkbox") || (elem.type === "radio"))

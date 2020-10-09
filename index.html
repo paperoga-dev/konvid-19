@@ -61,7 +61,7 @@
                                                     <div class="slidecontainer">
                                                         <form>
                                                             <input type="range" min="-9" max="3" value="1"
-                                                                data-ck="dbcaf" class="slider" step="1"
+                                                                data-ck="dbcaf" step="1"
                                                                 id="slDaysBetweenContactAndFever" oninput="update()">
                                                             <output id="slDaysBetweenContactAndFeverValue"
                                                                 for="slDaysBetweenContactAndFever">0</output>
@@ -91,156 +91,6 @@
 
         <br><br>
 
-        <!--
-        <form>
-            <fieldset>
-                <legend>Tampone untore</legend>
-                <table border="0" summary="" width="100%">
-                    <tr>
-                        <td>
-                            <label class="radiocontainer">Negativo
-                                <input type="radio" data-ck="kss1" name="btnKillerSwabState" value="0"
-                                    onchange="update()" checked>
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Positivo
-                                <input type="radio" data-ck="kss2" name="btnKillerSwabState" value="1"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Non eseguito
-                                <input type="radio" data-ck="kss3" name="btnKillerSwabState" value="2"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="radiocontainer">Data tampone sconosciuta
-                                <input type="radio" data-ck="ksd1" name="btnKillerSwabDate" value="0"
-                                    onchange="update()" checked>
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Data tampone nota
-                                <input type="radio" data-ck="ksd2" name="btnKillerSwabDate" value="1"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            Giorni tra contatto martire e tampone:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="-15" max="3" value="1" data-ck="dtvc" class="slider"
-                                        step="1" id="slDaysToVictimContact" oninput="update()">
-                                    <output id="slDaysToVictimContactValue" for="slDaysToVictimContact">0</output>
-                                    <div class="sliderticks">
-                                        <option>-15</option>
-                                        <option>-12</option>
-                                        <option>-9</option>
-                                        <option>-6</option>
-                                        <option>-3</option>
-                                        <option>0</option>
-                                        <option>3</option>
-                                    </div>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </form>
-
-        <br><br>
-
-        <form>
-            <fieldset>
-                <legend>Tampone martire</legend>
-                <table border="0" summary="" width="100%">
-                    <tr>
-                        <td>
-                            <label class="radiocontainer">Negativo
-                                <input type="radio" data-ck="vss1" name="btnVictimSwabState" value="0"
-                                    onchange="update()" checked>
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Positivo
-                                <input type="radio" data-ck="vss2" name="btnVictimSwabState" value="1"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Non eseguito
-                                <input type="radio" data-ck="vss3" name="btnVictimSwabState" value="2"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="radiocontainer">Data tampone sconosciuta
-                                <input type="radio" data-ck="vsd1" name="btnVictimSwabDate" value="0"
-                                    onchange="update()" checked>
-                            </label>
-                        </td>
-                        <td>
-                            <label class="radiocontainer">Data tampone nota
-                                <input type="radio" data-ck="vsd2" name="btnVictimSwabDate" value="1"
-                                    onchange="update()">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="spacer">
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            Giorni tra contatto untore e tampone:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="0" max="16" value="1" data-ck="dtkc" class="slider"
-                                        step="1" id="slDaysToKillerContact" oninput="update()">
-                                    <output id="slDaysToKillerContactValue" for="slDaysToKillerContact">0</output>
-                                    <div class="sliderticks">
-                                        <option>0</option>
-                                        <option>4</option>
-                                        <option>8</option>
-                                        <option>12</option>
-                                        <option>16</option>
-                                    </div>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </form>
-
-        <br><br>
-        -->
-
         <form>
             <fieldset>
                 <legend>Contatto tra te e l'infetto</legend>
@@ -258,8 +108,8 @@
                                     <td>
                                         <div class="slidecontainer">
                                             <form>
-                                                <input type="range" min="0" max="60" value="5" data-ck="cdv"
-                                                    class="slider" step="1" id="slContactDuration" oninput="update()">
+                                                <input type="range" min="0" max="60" value="5" data-ck="cdv" step="1"
+                                                    id="slContactDuration" oninput="update()">
                                                 <output id="slContactDurationValue" for="slContactDuration">0</output>
                                                 <div class="sliderticks">
                                                     <option>0</option>
@@ -297,8 +147,8 @@
                                     <td>
                                         <div class="slidecontainer">
                                             <form>
-                                                <input type="range" min="0" max="600" value="100" data-ck="adv"
-                                                    class="slider" step="1" id="slActorsDistance" oninput="update()">
+                                                <input type="range" min="0" max="600" value="100" data-ck="adv" step="1"
+                                                    id="slActorsDistance" oninput="update()">
                                                 <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
                                                 <div class="sliderticks">
                                                     <option>0</option>
@@ -460,8 +310,8 @@
                         <td>
                             <div class="slidecontainer">
                                 <form>
-                                    <input type="range" min="0" max="100" value="40" data-ck="vav" class="slider"
-                                        step="1" id="slVictimAge" oninput="update()">
+                                    <input type="range" min="0" max="100" value="40" data-ck="vav" step="1"
+                                        id="slVictimAge" oninput="update()">
                                     <output id="slVictimAgeValue" for="slVictimAge">0</output>
                                     <div class="sliderticks">
                                         <option>0</option>
@@ -473,6 +323,10 @@
                                     </div>
                                 </form>
                             </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="slVictimAgeText" style="text-align: center;">
                         </td>
                     </tr>
                 </table>
