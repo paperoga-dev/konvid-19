@@ -301,22 +301,6 @@ function update() {
     else
         document.querySelector('.progress-value').textContent = '';
 
-    let elems = document.querySelectorAll("[data-ck]");
-
-    cookieDict = {}
-    elems.forEach(elem => {
-        if (elem.type == "radio") {
-            if (elem.checked)
-                cookieDict[elem.getAttribute("data-ck")] = elem.checked;
-        } else if (elem.type == "checkbox") {
-            cookieDict[elem.getAttribute("data-ck")] = elem.checked;
-        } else {
-            cookieDict[elem.getAttribute("data-ck")] = elem.valueAsNumber;
-        }
-    })
-
-    setCookie(createDataForCookie(cookieDict), 30);
-
     document.getElementById("debug").style.visibility = (debug) ? "visible" : "collapse";
 
     if (isDebug) {
@@ -352,7 +336,17 @@ function update() {
     });
 }
 
+function acceptDisclaimer() {
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('overlay').style.display = 'none';
+    cookieDict["disclaimer"] = true;
+    setCookie(createDataForCookie(cookieDict), 30);
+}
+
 function init() {
+    document.getElementById('content').style.display = 'none';
+    document.getElementById('overlay').style.display = 'block';
+
     let cookieData = document.cookie;
     if (cookieData !== "") {
         cookieData.split(';').forEach(cookieElem => {
@@ -362,20 +356,10 @@ function init() {
 
             cookieDict = getDataFromCookie(cookieElem.replace("konvidCookie=", ""));
 
-            let elems = document.querySelectorAll("[data-ck]");
-
-            elems.forEach(elem => {
-                if ((elem.type === "checkbox") || (elem.type === "radio"))
-                    elem.checked = cookieDict[elem.getAttribute("data-ck")];
-                else
-                    elem.valueAsNumber = cookieDict[elem.getAttribute("data-ck")];
-            });
-
-            checkOneIfUnchecked(document.getElementsByName('btnKillerHasFever'));
-            checkOneIfUnchecked(document.getElementsByName('btnKillerAction'));
-            checkOneIfUnchecked(document.getElementsByName('btnPlaceType'));
-            checkOneIfUnchecked(document.getElementsByName('btnKillerShieldType'));
-            checkOneIfUnchecked(document.getElementsByName('btnVictimShieldType'));
+            if (!!cookieDict["disclaimer"]) {
+                document.getElementById('content').style.display = 'block';
+                document.getElementById('overlay').style.display = 'none';
+            }
         });
     }
 

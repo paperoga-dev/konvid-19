@@ -1,14 +1,41 @@
 body {
-  /* font-family: Arial, Helvetica, sans-serif; */
   font-family: 'Lato', sans-serif;
   margin-left: 2%;
   margin-right: 2%;
   padding-bottom: 160px;
 }
 
-.radio-table tr td:first-child{
-  width:1%;
-  white-space:nowrap;
+.overlay {
+  text-align: center;
+  padding: 30px;
+}
+
+.blinking {
+    font-weight: bolder;
+    animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: orange;
+    }
+    49% {
+        color: orange;
+    }
+    60% {
+        color: transparent;
+    }
+    99% {
+        color:transparent;
+    }
+    100% {
+        color: orange;
+    }
+}
+
+.radio-table tr td:first-child {
+  width: 1%;
+  white-space: nowrap;
 }
 
 .fixed-footer {
