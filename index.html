@@ -15,7 +15,61 @@
 </head>
 
 <body onload="init()">
-    <div class="content">
+    <div id="overlay" class="overlay">
+        <h1>
+            Benvenuti in Konvid-19!<br>
+            <br>
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td style="ext-align: center; vertical-align: middle;">
+                        <img src="warning.png" width="32">
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <span class="blinking">ATTENZIONE!</span>
+                    </td>
+                    <td style="ext-align: center; vertical-align: middle;">
+                        <img src="warning.png" width="32">
+                    </td>
+                </tr>
+            </table>
+        </h1>
+        <br>
+        Konvid-19 &egrave; uno <b style="color: red;">STRUMENTO DIDATTICO SENZA ALCUNA VALIDITÀ
+            DIAGNOSTICO-PROGNOSTICA.<br>
+            <h1>IL MEDICO DI BASE RIMANE L'UNICO TUTORE DELLA VOSTRA SALUTE.</h1>
+        </b><br>
+        <p align="justify">Konvid-19 è uno strumento dal valore puramente didattico, inteso come mera esercitazione
+            matematico/statistica,
+            senza carattere scientifico di controllo o prevenzione dell'infezione da Sars-Cov2. Il suo uso,
+            pertanto, non sostituisce in alcun modo il rapporto diretto con il vostro medico di medicina generale, che
+            continua a rimanere l'unico referente per la cura della vostra persona.<br><br>Gli autori non si assumono
+            alcuna responsabilit&agrave; per qualsiasi tipo di errore, omissione o danno (diretto, indiretto o
+            accidentale) derivante dall'impiego dello strumento Konvid-19. Gli autori, non essendo parti dirette o
+            indirette del Servizio Sanitario Nazionale, non hanno alcun mandato di occuparsi dello stato di salute dei
+            singoli utenti o fornire risposte individuali su tematiche cliniche, che invece richiedono sempre una
+            valutazione specifica da parte del medico curante.</p><br>
+        <br>
+        Questo strumento <b>non sostituisce, n&eacute; complementa</b>, gli strumenti attuali di controllo e
+        prevenzione dal contagio.<br>
+        Non &egrave; legato a nessuna tecnologia di Tracing attualmente presente su altri sistemi.<br>
+        <br>
+        <b style="color: red;">
+            <h1>
+                Il tool non memorizza in alcuna forma, n&eacute; trasmette a terzi, qualsiasi dato inserito o il
+                risultato del calcolo.
+            </h1>
+        </b>
+        <br>
+        NON CI INTERESSANO I TUOI DATI PERSONALI, TIPO CON CHI TI INFRATTI E CHI LIMONI O, PEGGIO, QUANTI ANNI
+        NORMALMENTE NEGHI DI AVERE, RAGION PER CUI QUELLO CHE SELEZIONI VIENE DISTRUTTO CON UN TRITADOCUMENTI DIGITALE
+        NON APPENA HAI FINITO.<br>
+        <br>
+        <br>
+        <button id="acceptButton" onclick="acceptDisclaimer()">
+            Accetta e Continua
+        </button>
+    </div>
+    <div id="content">
         <form>
             <fieldset>
                 <legend>Stato di salute dell'infetto</legend>
@@ -29,14 +83,14 @@
                                     </td>
                                     <td>
                                         <div class="radio-container">
-                                            <input type="radio" data-ck="khf1" name="btnKillerHasFever"
-                                                id="btnKillerHasFeverYes" value="1" onchange="update()" checked>
+                                            <input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverYes"
+                                                value="1" onchange="update()" checked>
                                             <label for="btnKillerHasFeverYes">S&igrave;</label>
-                                            <input type="radio" data-ck="khf2" name="btnKillerHasFever"
-                                                id="btnKillerHasFeverNo" value="0" onchange="update()">
+                                            <input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverNo"
+                                                value="0" onchange="update()">
                                             <label for="btnKillerHasFeverNo">No</label>
-                                            <input type="radio" data-ck="khf3" name="btnKillerHasFever"
-                                                id="btnKillerHasFeverDNK" value="2" onchange="update()">
+                                            <input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverDNK"
+                                                value="2" onchange="update()">
                                             <label for="btnKillerHasFeverDNK">Non lo so</label>
                                         </div>
                                     </td>
@@ -60,8 +114,7 @@
                                                 <td>
                                                     <div class="slidecontainer">
                                                         <form>
-                                                            <input type="range" min="-9" max="3" value="1"
-                                                                data-ck="dbcaf" step="1"
+                                                            <input type="range" min="-9" max="3" value="-3" step="1"
                                                                 id="slDaysBetweenContactAndFever" oninput="update()">
                                                             <output id="slDaysBetweenContactAndFeverValue"
                                                                 for="slDaysBetweenContactAndFever">0</output>
@@ -108,7 +161,7 @@
                                     <td>
                                         <div class="slidecontainer">
                                             <form>
-                                                <input type="range" min="0" max="60" value="5" data-ck="cdv" step="1"
+                                                <input type="range" min="0" max="60" value="30" step="1"
                                                     id="slContactDuration" oninput="update()">
                                                 <output id="slContactDurationValue" for="slContactDuration">0</output>
                                                 <div class="sliderticks">
@@ -147,7 +200,7 @@
                                     <td>
                                         <div class="slidecontainer">
                                             <form>
-                                                <input type="range" min="0" max="600" value="100" data-ck="adv" step="1"
+                                                <input type="range" min="0" max="600" value="80" step="1"
                                                     id="slActorsDistance" oninput="update()">
                                                 <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
                                                 <div class="sliderticks">
@@ -182,14 +235,14 @@
                                     </td>
                                     <td>
                                         <div class="radio-container">
-                                            <input type="radio" data-ck="ka1" name="btnKillerAction"
-                                                id="btnKillerActionSpeaks" value="100" onchange="update()" checked>
+                                            <input type="radio" name="btnKillerAction" id="btnKillerActionSpeaks"
+                                                value="100" onchange="update()" checked>
                                             <label for="btnKillerActionSpeaks">parla</label>
-                                            <input type="radio" data-ck="ka2" name="btnKillerAction"
-                                                id="btnKillerActionCoughs" value="200" onchange="update()">
+                                            <input type="radio" name="btnKillerAction" id="btnKillerActionCoughs"
+                                                value="200" onchange="update()">
                                             <label for="btnKillerActionCoughs">tossisce</label>
-                                            <input type="radio" data-ck="ka3" name="btnKillerAction"
-                                                id="btnKillerActionSneezes" value="600" onchange="update()">
+                                            <input type="radio" name="btnKillerAction" id="btnKillerActionSneezes"
+                                                value="600" onchange="update()">
                                             <label for="btnKillerActionSneezes">starnutisce</label>
                                         </div>
                                     </td>
@@ -209,11 +262,11 @@
                                     </td>
                                     <td>
                                         <div class="radio-container">
-                                            <input type="radio" data-ck="pt1" name="btnPlaceType"
-                                                id="btnPlaceTypeIndoor" value="1" onchange="update()" checked>
+                                            <input type="radio" name="btnPlaceType" id="btnPlaceTypeIndoor" value="1"
+                                                onchange="update()" checked>
                                             <label for="btnPlaceTypeIndoor">Al chiuso</label>
-                                            <input type="radio" data-ck="pt2" name="btnPlaceType"
-                                                id="btnPlaceTypeOutdoor" value="0" onchange="update()">
+                                            <input type="radio" name="btnPlaceType" id="btnPlaceTypeOutdoor" value="0"
+                                                onchange="update()">
                                             <label for="btnPlaceTypeOutdoor">All'aperto</label>
                                         </div>
                                     </td>
@@ -232,26 +285,26 @@
                     <tr>
                         <td>
                             <div class="radio-container">
-                                <input type="radio" data-ck="kst1" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeNone" value="0" onchange="update()" checked>
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeNone" value="0"
+                                    onchange="update()" checked>
                                 <label for="btnKillerShieldTypeNone">Nessuno</label>
-                                <input type="radio" data-ck="kst2" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeScarf" value="40" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeScarf" value="40"
+                                    onchange="update()">
                                 <label for="btnKillerShieldTypeScarf">Sciarpa</label>
-                                <input type="radio" data-ck="kst3" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeSurgical" value="50" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeSurgical"
+                                    value="50" onchange="update()">
                                 <label for="btnKillerShieldTypeSurgical">Chirurgica</label>
-                                <input type="radio" data-ck="kst4" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeFPP2" value="95" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeFPP2" value="95"
+                                    onchange="update()">
                                 <label for="btnKillerShieldTypeFPP2">FPP2</label>
-                                <input type="radio" data-ck="kst5" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeValvedFPP2" value="30" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeValvedFPP2"
+                                    value="30" onchange="update()">
                                 <label for="btnKillerShieldTypeValvedFPP2">FPP2 con valvola</label>
-                                <input type="radio" data-ck="kst6" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeFPP3" value="98" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeFPP3" value="98"
+                                    onchange="update()">
                                 <label for="btnKillerShieldTypeFPP3">FPP3</label>
-                                <input type="radio" data-ck="kst7" name="btnKillerShieldType"
-                                    id="btnKillerShieldTypeValvedFPP3" value="30" onchange="update()">
+                                <input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeValvedFPP3"
+                                    value="30" onchange="update()">
                                 <label for="btnKillerShieldTypeValvedFPP3">FPP3 con valvola</label>
                             </div>
                         </td>
@@ -267,26 +320,26 @@
                     <tr>
                         <td>
                             <div class="radio-container">
-                                <input type="radio" data-ck="vst1" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeNone" value="0" onchange="update()" checked>
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeNone" value="0"
+                                    onchange="update()" checked>
                                 <label for="btnVictimShieldTypeNone">Nessuno</label>
-                                <input type="radio" data-ck="vst2" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeScarf" value="10" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeScarf" value="10"
+                                    onchange="update()">
                                 <label for="btnVictimShieldTypeScarf">Sciarpa</label>
-                                <input type="radio" data-ck="vst3" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeSurgical" value="20" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeSurgical"
+                                    value="20" onchange="update()">
                                 <label for="btnVictimShieldTypeSurgical">Chirurgica</label>
-                                <input type="radio" data-ck="vst4" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeFPP2" value="95" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeFPP2" value="95"
+                                    onchange="update()">
                                 <label for="btnVictimShieldTypeFPP2">FPP2</label>
-                                <input type="radio" data-ck="vst5" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeValvedFPP2" value="95" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeValvedFPP2"
+                                    value="95" onchange="update()">
                                 <label for="btnVictimShieldTypeValvedFPP2">FPP2 con valvola</label>
-                                <input type="radio" data-ck="vst6" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeFPP3" value="98" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeFPP3" value="98"
+                                    onchange="update()">
                                 <label for="btnVictimShieldTypeFPP3">FPP3</label>
-                                <input type="radio" data-ck="vst7" name="btnVictimShieldType"
-                                    id="btnVictimShieldTypeValvedFPP3" value="98" onchange="update()">
+                                <input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeValvedFPP3"
+                                    value="98" onchange="update()">
                                 <label for="btnVictimShieldTypeValvedFPP3">FPP3 con valvola</label>
                             </div>
                         </td>
@@ -310,8 +363,8 @@
                         <td>
                             <div class="slidecontainer">
                                 <form>
-                                    <input type="range" min="0" max="100" value="40" data-ck="vav" step="1"
-                                        id="slVictimAge" oninput="update()">
+                                    <input type="range" min="0" max="100" value="50" step="1" id="slVictimAge"
+                                        oninput="update()">
                                     <output id="slVictimAgeValue" for="slVictimAge">0</output>
                                     <div class="sliderticks">
                                         <option>0</option>
@@ -332,18 +385,18 @@
                 </table>
             </fieldset>
         </form>
-    </div>
-    <div id="debug">
-    </div>
+        <div id="debug">
+        </div>
 
-    <div class="fixed-footer">
-        <h2>
-            Fattore di rischio<br>
-            <div class="progress">
-                <div class="progress-done"></div>
-                <div class="progress-value"></div>
-            </div>
-        </h2>
+        <div class="fixed-footer">
+            <h2>
+                Fattore di rischio<br>
+                <div class="progress">
+                    <div class="progress-done"></div>
+                    <div class="progress-value"></div>
+                </div>
+            </h2>
+        </div>
     </div>
 </body>
 
