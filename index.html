@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>KONVID-19 v0.8</title>
+    <title>KONVID-19 v0.9</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv=" cache-control" content="max-age=0, no-cache, no-store, must-revalidate" />
@@ -18,47 +18,47 @@
     <div id="overlay" class="overlay">
         <h1>
             Benvenuti in Konvid-19!<br>
-            <br>
-            <table style="margin-left: auto; margin-right: auto;">
-                <tr>
-                    <td style="ext-align: center; vertical-align: middle;">
-                        <img src="warning.png" width="32">
-                    </td>
-                    <td style="text-align: center; vertical-align: middle;">
-                        <span class="blinking">ATTENZIONE!</span>
-                    </td>
-                    <td style="ext-align: center; vertical-align: middle;">
-                        <img src="warning.png" width="32">
-                    </td>
-                </tr>
-            </table>
         </h1>
+        <br>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="warning.png" width="32" alt="warning">
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <span class="blinking">ATTENZIONE!</span>
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="warning.png" width="32" alt="warning">
+                </td>
+            </tr>
+        </table>
         <br>
         Konvid-19 &egrave; uno <b style="color: red;">STRUMENTO DIDATTICO SENZA ALCUNA VALIDITÀ
             DIAGNOSTICO-PROGNOSTICA.<br>
-            <h1>IL MEDICO DI BASE RIMANE L'UNICO TUTORE DELLA VOSTRA SALUTE.</h1>
-        </b><br>
-        <p align="justify">Konvid-19 è uno strumento dal valore puramente didattico, inteso come mera esercitazione
-            matematico/statistica,
-            senza carattere scientifico di controllo o prevenzione dell'infezione da Sars-Cov2. Il suo uso,
-            pertanto, non sostituisce in alcun modo il rapporto diretto con il vostro medico di medicina generale, che
-            continua a rimanere l'unico referente per la cura della vostra persona.<br><br>Gli autori non si assumono
-            alcuna responsabilit&agrave; per qualsiasi tipo di errore, omissione o danno (diretto, indiretto o
-            accidentale) derivante dall'impiego dello strumento Konvid-19. Gli autori, non essendo parti dirette o
-            indirette del Servizio Sanitario Nazionale, non hanno alcun mandato di occuparsi dello stato di salute dei
-            singoli utenti o fornire risposte individuali su tematiche cliniche, che invece richiedono sempre una
-            valutazione specifica da parte del medico curante.</p><br>
+        </b>
+        <h1 style="color: red; font-weight: bolder;">IL MEDICO DI BASE RIMANE L'UNICO TUTORE DELLA VOSTRA SALUTE.</h1>
+        <br>
+        <p style="text-align: justify;">Konvid-19 è uno strumento dal valore puramente didattico, inteso come mera
+            esercitazione matematico/statistica, senza carattere scientifico di controllo o prevenzione dell'infezione
+            da SARS-CoV-2. Il suo uso, pertanto, non sostituisce in alcun modo il rapporto diretto con il vostro medico
+            di medicina generale, che ontinua a rimanere l'unico referente per la cura della vostra persona.<br><br>Gli
+            autori non si assumono alcuna responsabilit&agrave; per qualsiasi tipo di errore, omissione o danno
+            (diretto, indiretto o accidentale) derivante dall'impiego dello strumento Konvid-19. Gli autori, non essendo
+            parti dirette o indirette del Servizio Sanitario Nazionale, non hanno alcun mandato di occuparsi dello stato
+            di salute dei singoli utenti o fornire risposte individuali su tematiche cliniche, che invece richiedono
+            sempre una valutazione specifica da parte del medico curante.</p><br>
         <br>
         Questo strumento <b>non sostituisce, n&eacute; complementa</b>, gli strumenti attuali di controllo e
         prevenzione dal contagio.<br>
         Non &egrave; legato a nessuna tecnologia di Tracing attualmente presente su altri sistemi.<br>
         <br>
-        <b style="color: red;">
-            <h1>
+        <h1>
+            <b style="color: red;">
                 Il tool non memorizza in alcuna forma, n&eacute; trasmette a terzi, qualsiasi dato inserito o il
                 risultato del calcolo.
-            </h1>
-        </b>
+            </b>
+        </h1>
         <br>
         NON CI INTERESSANO I TUOI DATI PERSONALI, TIPO CON CHI TI INFRATTI E CHI LIMONI O, PEGGIO, QUANTI ANNI
         NORMALMENTE NEGHI DI AVERE, RAGION PER CUI QUELLO CHE SELEZIONI VIENE DISTRUTTO CON UN TRITADOCUMENTI DIGITALE
@@ -73,10 +73,10 @@
         <form>
             <fieldset>
                 <legend>Stato di salute dell'infetto</legend>
-                <table summary="" width="100%">
+                <table style="width: 100%;">
                     <tr>
                         <td>
-                            <table summary="" width="100%" class="radio-table">
+                            <table style="width: 100%;" class="radio-table">
                                 <tr>
                                     <td>
                                         Ha la febbre:
@@ -100,11 +100,11 @@
                     </tr>
                     <tr id="rowDaysBetweenContactAndFever">
                         <td>
-                            <table summary="" width="100%">
+                            <table style="width: 100%;">
                                 <tr>
                                     <td>
-                                        <table summary="" width="100%"
-                                            style="background-color: #fff2d2; padding: 3px; border-radius: 5px;">
+                                        <table
+                                            style="width: 100%; background-color: #fff2d2; padding: 3px; border-radius: 5px;">
                                             <tr>
                                                 <td>
                                                     Quando l'infetto ha manifestato la febbre?
@@ -113,18 +113,21 @@
                                             <tr>
                                                 <td>
                                                     <div class="slidecontainer">
-                                                        <form>
-                                                            <input type="range" min="-9" max="3" value="-3" step="1"
-                                                                id="slDaysBetweenContactAndFever" oninput="update()">
-                                                            <output id="slDaysBetweenContactAndFeverValue"
-                                                                for="slDaysBetweenContactAndFever">0</output>
-                                                            <div class="sliderticks">
-                                                                <option style="font-weight: bold;">9 giorni prima
-                                                                </option>
-                                                                <option style="font-weight: bold;">3 giorni dopo
-                                                                </option>
-                                                            </div>
-                                                        </form>
+                                                        <input style="background-color: #fff2d2;" type="range" min="-9"
+                                                            max="3" value="-3" step="1"
+                                                            id="slDaysBetweenContactAndFever" oninput="update()"
+                                                            list="slDaysBetweenContactAndFeverList">
+                                                        <output id="slDaysBetweenContactAndFeverValue"
+                                                            for="slDaysBetweenContactAndFever">0</output>
+                                                        <datalist class="sliderticks"
+                                                            id="slDaysBetweenContactAndFeverList">
+                                                            <option style="font-weight: bold;">
+                                                                9 giorni prima
+                                                            </option>
+                                                            <option style="font-weight: bold;">
+                                                                3 giorni dopo
+                                                            </option>
+                                                        </datalist>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -140,18 +143,15 @@
                     </tr>
                 </table>
             </fieldset>
-        </form>
 
-        <br><br>
+            <br><br>
 
-        <form>
             <fieldset>
                 <legend>Contatto tra te e l'infetto</legend>
-                <table summary="" width="100%">
+                <table style="width: 100%;">
                     <tr>
                         <td>
-                            <table summary="" width="100%"
-                                style="background-color: #e4ffd2; padding: 3px; border-radius: 5px;">
+                            <table style="width: 100%; background-color: #e4ffd2; padding: 3px; border-radius: 5px;">
                                 <tr>
                                     <td>
                                         Per quanto tempo sei stato con l'infetto (minuti)?
@@ -160,20 +160,19 @@
                                 <tr>
                                     <td>
                                         <div class="slidecontainer">
-                                            <form>
-                                                <input type="range" min="0" max="60" value="30" step="1"
-                                                    id="slContactDuration" oninput="update()">
-                                                <output id="slContactDurationValue" for="slContactDuration">0</output>
-                                                <div class="sliderticks">
-                                                    <option>0</option>
-                                                    <option>10</option>
-                                                    <option>20</option>
-                                                    <option>30</option>
-                                                    <option>40</option>
-                                                    <option>50</option>
-                                                    <option>60</option>
-                                                </div>
-                                            </form>
+                                            <input style="background-color: #e4ffd2;" type="range" min="0" max="60"
+                                                value="30" step="1" id="slContactDuration" list="slContactDurationList"
+                                                oninput="update()">
+                                            <output id="slContactDurationValue" for="slContactDuration">0</output>
+                                            <datalist class="sliderticks" id="slContactDurationList">
+                                                <option>0</option>
+                                                <option>10</option>
+                                                <option>20</option>
+                                                <option>30</option>
+                                                <option>40</option>
+                                                <option>50</option>
+                                                <option>60</option>
+                                            </datalist>
                                         </div>
                                     </td>
                                 </tr>
@@ -189,8 +188,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <table summary="" width="100%"
-                                style="background-color: #ddeeff; padding: 3px; border-radius: 5px;">
+                            <table style="width: 100%; background-color: #ddeeff; padding: 3px; border-radius: 5px;">
                                 <tr>
                                     <td>
                                         A quale distanza, in media (centimetri)?
@@ -199,20 +197,19 @@
                                 <tr>
                                     <td>
                                         <div class="slidecontainer">
-                                            <form>
-                                                <input type="range" min="0" max="600" value="80" step="1"
-                                                    id="slActorsDistance" oninput="update()">
-                                                <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
-                                                <div class="sliderticks">
-                                                    <option>0</option>
-                                                    <option>100</option>
-                                                    <option>200</option>
-                                                    <option>300</option>
-                                                    <option>400</option>
-                                                    <option>500</option>
-                                                    <option>600</option>
-                                                </div>
-                                            </form>
+                                            <input style="background-color: #ddeeff;" type="range" min="0" max="600"
+                                                value="80" step="1" id="slActorsDistance" list="slActorsDistanceList"
+                                                oninput="update()">
+                                            <output id="slActorsDistanceValue" for="slActorsDistance">0</output>
+                                            <datalist class="sliderticks" id="slActorsDistanceList">
+                                                <option>0</option>
+                                                <option>100</option>
+                                                <option>200</option>
+                                                <option>300</option>
+                                                <option>400</option>
+                                                <option>500</option>
+                                                <option>600</option>
+                                            </datalist>
                                         </div>
                                     </td>
                                 </tr>
@@ -228,7 +225,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <table summary="" width="100%" class="radio-table">
+                            <table style="width: 100%;" class="radio-table">
                                 <tr>
                                     <td>
                                         L'infetto:
@@ -255,10 +252,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <table summary="" width="100%" class="radio-table">
+                            <table style="width: 100%;" class="radio-table">
                                 <tr>
                                     <td>
-                                        Luogo d'incontro:
+                                        Luogo del contatto:
                                     </td>
                                     <td>
                                         <div class="radio-container">
@@ -279,7 +276,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Fattore di protezione dell'infetto:
+                            Dispositivo di protezione dell'infetto:
                         </td>
                     </tr>
                     <tr>
@@ -314,7 +311,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Tuo fattore di protezione:
+                            Tuo dispositivo di protezione:
                         </td>
                     </tr>
                     <tr>
@@ -346,14 +343,12 @@
                     </tr>
                 </table>
             </fieldset>
-        </form>
 
-        <br><br>
+            <br><br>
 
-        <form>
             <fieldset>
-                <legend>Tuoi dati anagrafici</legend>
-                <table summary="" width="100%">
+                <legend>Quanto ti manca a morire?</legend>
+                <table style="width: 100%;">
                     <tr>
                         <td>
                             Et&agrave;:
@@ -362,19 +357,17 @@
                     <tr>
                         <td>
                             <div class="slidecontainer">
-                                <form>
-                                    <input type="range" min="0" max="100" value="50" step="1" id="slVictimAge"
-                                        oninput="update()">
-                                    <output id="slVictimAgeValue" for="slVictimAge">0</output>
-                                    <div class="sliderticks">
-                                        <option>0</option>
-                                        <option>20</option>
-                                        <option>40</option>
-                                        <option>60</option>
-                                        <option>80</option>
-                                        <option>100</option>
-                                    </div>
-                                </form>
+                                <input type="range" min="0" max="100" value="50" step="1" id="slVictimAge"
+                                    list="slVictimAgeList" oninput="update()">
+                                <output id="slVictimAgeValue" for="slVictimAge">0</output>
+                                <datalist class="sliderticks" id="slVictimAgeList">
+                                    <option>0</option>
+                                    <option>20</option>
+                                    <option>40</option>
+                                    <option>60</option>
+                                    <option>80</option>
+                                    <option>100</option>
+                                </datalist>
                             </div>
                         </td>
                     </tr>
@@ -384,19 +377,19 @@
                     </tr>
                 </table>
             </fieldset>
-        </form>
-        <div id="debug">
-        </div>
+            <div id="debug">
+            </div>
 
-        <div class="fixed-footer">
-            <h2>
-                Fattore di rischio<br>
+            <div class="fixed-footer">
+                <h2>
+                    Fattore di rischio<br>
+                </h2>
                 <div class="progress">
                     <div class="progress-done"></div>
                     <div class="progress-value"></div>
                 </div>
-            </h2>
-        </div>
+            </div>
+        </form>
     </div>
 </body>
 
