@@ -11,26 +11,26 @@ body {
 }
 
 .blinking {
-    font-weight: bolder;
-    animation: blinkingText 1.2s infinite;
+  font-weight: bolder;
+  animation: blinkingText 1.2s infinite;
 }
 
 @keyframes blinkingText {
-    0% {
-        color: orange;
-    }
-    49% {
-        color: orange;
-    }
-    60% {
-        color: transparent;
-    }
-    99% {
-        color:transparent;
-    }
-    100% {
-        color: orange;
-    }
+  0% {
+    color: orange;
+  }
+  49% {
+    color: orange;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color:transparent;
+  }
+  100% {
+    color: orange;
+  }
 }
 
 .radio-table tr td:first-child {
@@ -50,7 +50,7 @@ body {
 }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: 100%;
 }
 
 .radio-container {
@@ -71,14 +71,14 @@ body {
 }
 
 .radio-container label {
-    display: inline-block;
-    color: black;
-    background-color: #ddd;
-    padding: 10px 20px;
-    font-family: sans-serif, Arial;
-    font-size: 16px;
-    border: 2px solid #444;
-    border-radius: 4px;
+  display: inline-block;
+  color: black;
+  background-color: #ddd;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 2px solid #444;
+  border-radius: 4px;
 }
 
 .radio-container label:hover {
