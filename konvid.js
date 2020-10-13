@@ -240,6 +240,7 @@ function update() {
         }
 
         let aD = document.getElementById("slActorsDistance").valueAsNumber;
+        let origAD = aD;
         actorsDistance = Math.min(aD, maxD);
         ne = calculateNE(actorsDistance, maxD);
 
@@ -251,26 +252,26 @@ function update() {
             if (aD >= 100) {
                 let meters = Math.trunc(aD / 100);
                 aD = aD - meters * 100;
-                slText.innerHTML = meters + " metr" + ((meters == 1)? "o" : "i") + " ";
+                slText.innerHTML = meters + " metr" + ((meters == 1) ? "o" : "i") + " ";
             }
             if (aD !== 0) {
                 slText.innerHTML += aD + " centimetr" + ((aD == 1) ? "o" : "i") + " ";
             }
         }
         slText.innerHTML += "=> ";
-        if (aD > 500) {
+        if (origAD > 500) {
             slText.innerHTML += "incrociare il proprio capo";
-        } else if (aD > 400) {
+        } else if (origAD > 400) {
             slText.innerHTML += "incrociare punkabbestia sotto ketamina con pitbull ringhiante";
-        } else if (aD > 300) {
+        } else if (origAD > 300) {
             slText.innerHTML += "dirimpettaia che parla male della portinaia";
-        } else if (aD > 200) {
+        } else if (origAD > 200) {
             slText.innerHTML += "mi scusi... crede nella vita dopo la morte?";
-        } else if (aD > 100) {
+        } else if (origAD > 100) {
             slText.innerHTML += "mi fai questa fotocopia?";
-        } else if (aD > 50) {
+        } else if (origAD > 50) {
             slText.innerHTML += "sgomitatore in metropolitana";
-        } else if (aD > 10) {
+        } else if (origAD > 10) {
             slText.innerHTML += "strizzargli un punto nero sul naso";
         } else {
             slText.innerHTML += "giochiamo ad annoda-lingue?";
