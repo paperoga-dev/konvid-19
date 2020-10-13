@@ -205,22 +205,22 @@ function update() {
 
         let slText = document.getElementById("slDaysBetweenContactAndFeverText");
         if (daysBetweenContactAndFever < -1) {
-            slText.innerHTML = -daysBetweenContactAndFever + " giorni <b>prima</b> del contatto";
+            slText.innerHTML = -daysBetweenContactAndFever + " giorni <b>prima</b> del vostro contatto";
         } else if (daysBetweenContactAndFever === -1) {
-            slText.innerHTML = "il giorno <b>prima</b> del contatto";
+            slText.innerHTML = "il giorno <b>prima</b> del vostro contatto";
         } else if (daysBetweenContactAndFever === 0) {
-            slText.innerHTML = "<b>il giorno stesso</b>";
+            slText.innerHTML = "<b>il giorno in cui lo hai incontrato</b>";
         } else if (daysBetweenContactAndFever === 1) {
-            slText.innerHTML = "il giorno <b>dopo</b> il contatto";
+            slText.innerHTML = "il giorno <b>dopo</b> il vostro contatto";
         } else {
-            slText.innerHTML = daysBetweenContactAndFever + " giorni <b>dopo</b> il contatto";
+            slText.innerHTML = daysBetweenContactAndFever + " giorni <b>dopo</b> il vostro contatto";
         }
 
         contactDuration = document.getElementById("slContactDuration").valueAsNumber;
         fp = calculateFP(contactDuration);
 
         slText = document.getElementById("slContactDurationText");
-        slText.innerHTML = contactDuration + " minut" + ((contactDuration == 1) ? "o" : "i") + " = ";
+        slText.innerHTML = contactDuration + " minut" + ((contactDuration == 1) ? "o" : "i") + " => ";
         if (contactDuration > 50) {
             slText.innerHTML += "trovare un parcheggio sotto casa";
         } else if (contactDuration > 40) {
@@ -244,7 +244,20 @@ function update() {
         ne = calculateNE(actorsDistance, maxD);
 
         slText = document.getElementById("slActorsDistanceText");
-        slText.innerHTML = aD + " centimetr" + ((aD == 1) ? "o" : "i") + " = ";
+        slText.innerHTML = "";
+        if (aD === 0) {
+            slText.innerHTML += "distanza zero ";
+        } else {
+            if (aD >= 100) {
+                let meters = Math.trunc(aD / 100);
+                aD = aD - meters * 100;
+                slText.innerHTML = meters + " metr" + ((meters == 1)? "o" : "i") + " ";
+            }
+            if (aD !== 0) {
+                slText.innerHTML += aD + " centimetr" + ((aD == 1) ? "o" : "i") + " ";
+            }
+        }
+        slText.innerHTML += "=> ";
         if (aD > 500) {
             slText.innerHTML += "incrociare il proprio capo";
         } else if (aD > 400) {
