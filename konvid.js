@@ -224,13 +224,13 @@ function update() {
         if (contactDuration > 50) {
             slText.innerHTML += "trovare un parcheggio sotto casa";
         } else if (contactDuration > 40) {
-            slText.innerHTML += "rapporto sessuale su YouPorn";
+            slText.innerHTML += "rapporto sessuale in un film porno";
         } else if (contactDuration > 30) {
             slText.innerHTML += "antivax che ti spiega del mercurio nei vaccini";
         } else if (contactDuration > 20) {
             slText.innerHTML += "cottura al microonde di lasagne congelate";
         } else if (contactDuration > 10) {
-            slText.innerHTML += "durata di una pubblicit&agrave; Mediaset";
+            slText.innerHTML += "durata di una pubblicit&agrave; di un programma per bambini";
         } else if (contactDuration > 5) {
             slText.innerHTML += "ricordarti dove hai messo la mascherina";
         } else if (contactDuration > 2) {
@@ -299,21 +299,23 @@ function update() {
 
     let N = Math.max((((killerShield === 0.0) || (victimShield === 0.0)) && (actorsDistance < 100)) ? 10.0 : 1.0, Math.min(100.0, Math.round(realN * 100.0 / maxValue)));
 
-    let progressDone = document.querySelector('.progress-done');
-    progressDone.style.width = N + '%';
+    document.getElementById('progress-done').style.width = N + '%';
+    let pB = document.getElementById('progress-bar');
     if (N >= 66.6)
-        progressDone.style.backgroundColor = "red";
+        pB.className = "progress-bar red glow";
     else if (N >= 33.3)
-        progressDone.style.backgroundColor = "orange";
+        pB.className = "progress-bar orange glow";
     else
-        progressDone.style.backgroundColor = "lightgreen";
+        pB.className = "progress-bar green glow";
 
     let isDebug = window.location.search.endsWith("?debug");
 
+    /*
     if (isDebug)
         document.querySelector('.progress-value').textContent = N + '%';
     else
         document.querySelector('.progress-value').textContent = '';
+    */
 
     document.getElementById("debug").style.visibility = (debug) ? "visible" : "collapse";
 
