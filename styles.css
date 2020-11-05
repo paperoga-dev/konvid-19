@@ -5,6 +5,19 @@ body {
   padding-bottom: 160px;
 }
 
+li {
+  margin-bottom: 40px;
+}
+
+li:last-child {
+ margin-bottom: 0px;
+}
+
+ul {
+  padding: 1px;
+  padding-left: 40px;
+}
+
 .overlay {
   text-align: center;
   padding: 30px;

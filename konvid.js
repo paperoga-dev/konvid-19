@@ -292,7 +292,7 @@ function update() {
         slText = document.getElementById("slVictimAgeText");
         slText.innerHTML = victimAge + " ann" + ((victimAge == 1) ? "o" : "i");
 
-        realN = R * tu * tm * fp * ne * fl * fi * fc * L /* P */;
+        realN = R * tu * tm * fp * ne * fl * fi * fc * L;
     } catch (exc) {
         realN = maxValue;
     }
@@ -309,13 +309,6 @@ function update() {
         pB.className = "progress-bar green glow";
 
     let isDebug = window.location.search.endsWith("?debug");
-
-    /*
-    if (isDebug)
-        document.querySelector('.progress-value').textContent = N + '%';
-    else
-        document.querySelector('.progress-value').textContent = '';
-    */
 
     document.getElementById("debug").style.visibility = (debug) ? "visible" : "collapse";
 
