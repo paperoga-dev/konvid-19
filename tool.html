@@ -1,0 +1,423 @@
+		<!DOCTYPE HTML>
+		<!--
+			Editorial by HTML5 UP
+			html5up.net | @ajlkn
+			Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+		-->
+		<html>
+		<head>
+			<title>Konvid-19</title>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			<link rel="stylesheet" href="assets/css/main.css" />
+
+			<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+
+		</head>
+		<body class="is-preload">
+
+			<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+				<div id="main">
+					<div class="inner">
+
+						<!-- Header -->
+						<header id="header">
+							<a href="index.html" class="logo"><strong>Konvid-19</strong></a>
+						</header>
+
+						<!-- Content -->
+						<section>
+							<header class="main">
+								
+							</header>
+							<p>Compila le informazioni sottostanti e osserva la percentuale di rischio salire o scendere</p>
+							<form>
+								<fieldset>
+									<h3>Stato di salute dell'infetto</h3>
+									<table style="width: 100%;">
+										<tr>
+											<td>
+												<table style="width: 100%;" class="radio-table">
+													<tr>
+														<td>
+															<b>Ha i sintomi (tosse e/o febbre)?</b><br />&nbsp;
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="radio-container">
+																<input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverYes"
+																value="1" onchange="update()" checked>
+																<label for="btnKillerHasFeverYes">S&igrave;</label>
+																<input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverNo"
+																value="0" onchange="update()">
+																<label for="btnKillerHasFeverNo">No</label>
+																<input type="radio" name="btnKillerHasFever" id="btnKillerHasFeverDNK"
+																value="2" onchange="update()">
+																<label for="btnKillerHasFeverDNK">Non lo so</label>
+															</div>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr id="rowDaysBetweenContactAndFever">
+											<td><hr class="new"><br><br>
+												<table style="width: 100%;">
+													<tr>
+														<td>
+															<table style="width: 100%; padding: 3px; border-radius: 5px;">
+																<tr>
+																	<td>
+																		<b>Quando li ha manifestati?</b>
+																	</td>
+																</tr>
+																<tr>
+																	<td id="slDaysBetweenContactAndFeverText" style="text-align: center;">
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<div class="slidecontainer">
+																			<input style="background-color: #021935;" type="range" min="-9" max="3" value="-3" step="1"
+																			id="slDaysBetweenContactAndFever" oninput="update()" list="slDaysBetweenContactAndFeverList">
+																			<output id="slDaysBetweenContactAndFeverValue" for="slDaysBetweenContactAndFever">0</output>
+																			<datalist class="sliderticks" id="slDaysBetweenContactAndFeverList">
+																				<option style="font-weight: bold;"> 9 giorni prima </option>
+																				<option style="font-weight: bold;"> 3 giorni dopo </option>
+																			</datalist>
+																		</div>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</fieldset>
+
+								
+
+								<fieldset>
+									<H3>Contatto tra te e l'infetto</H3>
+									<table style="width: 100%;">
+										<tr>
+											<td>
+												<table style="width: 100%; padding: 3px; border-radius: 5px;">
+													<tr>
+														<td>
+															<b>Per quanto tempo sei stato con l'infetto (minuti)?</b>
+														</td>
+													</tr>
+													<tr>
+														<td id="slContactDurationText" style="text-align: center;">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="slidecontainer">
+																<input style="background-color: #021935;" type="range" min="0" max="60"
+																value="30" step="1" id="slContactDuration" list="slContactDurationList"
+																oninput="update()">
+																<output id="slContactDurationValue" for="slContactDuration">0</output>
+																<datalist class="sliderticks" id="slContactDurationList">
+																	<option>0</option>
+																	<option>10</option>
+																	<option>20</option>
+																	<option>30</option>
+																	<option>40</option>
+																	<option>50</option>
+																	<option>60</option>
+																</datalist>
+															</div>
+														</td>
+													</tr>
+													
+												</table>
+											</td>
+										</tr>
+										<tr class="spacer">
+											<td></td>
+										</tr>
+										
+										<tr>
+											<td><hr class="new"><br><br>
+												<table style="width: 100%; padding: 3px; border-radius: 5px;">
+													<tr>
+														<td>
+															<b>A quale distanza, in media (centimetri)?</b>
+														</td>
+													</tr>
+													<tr>
+														<td id="slActorsDistanceText" style="text-align: center;">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="slidecontainer">
+																<input style="background-color: #021935;" type="range" min="0" max="600"
+																value="80" step="1" id="slActorsDistance" list="slActorsDistanceList"
+																oninput="update()">
+																<output id="slActorsDistanceValue" for="slActorsDistance">0</output>
+																<datalist class="sliderticks" id="slActorsDistanceList">
+																	<option>0</option>
+																	<option>100</option>
+																	<option>200</option>
+																	<option>300</option>
+																	<option>400</option>
+																	<option>500</option>
+																	<option>600</option>
+																</datalist>
+															</div>
+														</td>
+													</tr>
+													
+												</table>
+											</td>
+										</tr>
+										<tr class="spacer">
+											<td></td>
+										</tr>
+										<tr>
+											<td><hr class="new"><br><br>
+												<table style="width: 100%;" class="radio-table">
+													<tr>
+														<td>
+															<b>L'infetto:</b>
+														</td>
+														<td>
+															<div class="radio-container">
+																<input type="radio" name="btnKillerAction" id="btnKillerActionSpeaks"
+																value="100" onchange="update()" checked>
+																<label for="btnKillerActionSpeaks">parla</label>
+																<input type="radio" name="btnKillerAction" id="btnKillerActionCoughs"
+																value="200" onchange="update()">
+																<label for="btnKillerActionCoughs">tossisce</label>
+																<input type="radio" name="btnKillerAction" id="btnKillerActionSneezes"
+																value="600" onchange="update()">
+																<label for="btnKillerActionSneezes">starnutisce</label>
+															</div>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr class="spacer">
+											<td></td>
+										</tr>
+										<tr>
+											<td><hr class="new"><br><br>
+												<table style="width: 100%;" class="radio-table">
+													<tr>
+														<td>
+															<b>Luogo del contatto:</b>
+														</td>
+														<td>
+															<div class="radio-container">
+																<input type="radio" name="btnPlaceType" id="btnPlaceTypeIndoor" value="1"
+																onchange="update()" checked>
+																<label for="btnPlaceTypeIndoor">Al chiuso</label>
+																<input type="radio" name="btnPlaceType" id="btnPlaceTypeOutdoor" value="0"
+																onchange="update()">
+																<label for="btnPlaceTypeOutdoor">All'aperto</label>
+															</div>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr class="spacer">
+											<td></td>
+										</tr>
+
+										<tr>
+											<td><hr class="new"><br><br>
+												<table style="width: 100%; padding: 3px; border-radius: 5px;"><tr><td>
+													<b>Dispositivo di protezione dell'infetto:</b>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeNone" value="0"
+														onchange="update()" checked>
+														<label for="btnKillerShieldTypeNone">Nessuno</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeScarf" value="40"
+														onchange="update()">
+														<label for="btnKillerShieldTypeScarf">Sciarpa</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeSurgical"
+														value="50" onchange="update()">
+														<label for="btnKillerShieldTypeSurgical">Chirurgica</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeFPP2" value="95"
+														onchange="update()">
+														<label for="btnKillerShieldTypeFPP2">FPP2</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeValvedFPP2"
+														value="30" onchange="update()">
+														<label for="btnKillerShieldTypeValvedFPP2">FPP2 con valvola</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeFPP3" value="98"
+														onchange="update()">
+														<label for="btnKillerShieldTypeFPP3">FPP3</label>
+														<input type="radio" name="btnKillerShieldType" id="btnKillerShieldTypeValvedFPP3"
+														value="30" onchange="update()">
+														<label for="btnKillerShieldTypeValvedFPP3">FPP3 con valvola</label>
+													</div>
+												</td></tr></table>
+											</td>
+
+										</tr>
+										<tr class="spacer">
+											<td></td>
+										</tr>
+										<tr>
+											<td><hr class="new"><br><br>
+												<table style="width: 100%; padding: 3px; border-radius: 5px;"><tr><td>
+													<b>Tuo dispositivo di protezione:</b>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeNone" value="0"
+														onchange="update()" checked>
+														<label for="btnVictimShieldTypeNone">Nessuno</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeScarf" value="10"
+														onchange="update()">
+														<label for="btnVictimShieldTypeScarf">Sciarpa</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeSurgical"
+														value="20" onchange="update()">
+														<label for="btnVictimShieldTypeSurgical">Chirurgica</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeFPP2" value="95"
+														onchange="update()">
+														<label for="btnVictimShieldTypeFPP2">FPP2</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeValvedFPP2"
+														value="95" onchange="update()">
+														<label for="btnVictimShieldTypeValvedFPP2">FPP2 con valvola</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeFPP3" value="98"
+														onchange="update()">
+														<label for="btnVictimShieldTypeFPP3">FPP3</label>
+														<input type="radio" name="btnVictimShieldType" id="btnVictimShieldTypeValvedFPP3"
+														value="98" onchange="update()">
+														<label for="btnVictimShieldTypeValvedFPP3">FPP3 con valvola</label>
+													</div>
+												</td></tr></table>
+											</td>
+										</tr>
+									</table>
+								</fieldset>
+								<br><br>
+
+
+								<fieldset>
+									<h3>La tua et&agrave;</h3>
+									<table style="width: 100%;">
+										<tr>
+											<td id="slVictimAgeText" style="text-align: center;">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="slidecontainer">
+													<input style="background-color: #021935" type="range" min="0" max="100" value="50" step="1" id="slVictimAge"
+													list="slVictimAgeList" oninput="update()">
+													<output id="slVictimAgeValue" for="slVictimAge">0</output>
+													<datalist class="sliderticks" id="slVictimAgeList">
+														<option>0</option>
+														<option>20</option>
+														<option>40</option>
+														<option>60</option>
+														<option>80</option>
+														<option>100</option>
+													</datalist>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<br><br><br>
+
+											</td>
+										</tr>
+										
+									</table>
+								</fieldset>
+								<div id="debug">
+								</div>
+
+								<div class="fixed-footer">
+									<h2>
+										Fattore di rischio<br>
+									</h2>
+									<div id="progress-bar" class="progress-bar green">
+										<span id="progress-done"></span>
+									</div>
+								</div>
+								
+
+							</form>
+
+
+						</section>
+
+
+					</div>
+				</div>
+
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Homepage</a></li>
+								<li><a href="tool.html">Calcola il tuo rischio di contagio</a></li>
+								<li><a href="documentazione.html">Documentazione</a></li>
+								<li><a href="disclaimer.html">Disclaimer</a></li>
+								<li><a href="cookiepolicy.html">Cookie Policy</a></li>
+								<li><a href="lamentele.html">Lamentele</a></li>
+							</ul>
+						</nav>
+
+						<!-- Footer -->
+						
+
+					</div>
+				</div>
+
+
+			</div>
+			<footer id="footer">
+									<p class="copyright">&copy; Kon-igi & Co. Tutti i diritti riservati. <br>Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+			</footer>
+
+<div class="hidden" id="cookie-banner">
+    <div>
+         <span>
+                Questo sito fa uso di cookie per migliorare l’esperienza di navigazione degli utenti. Proseguendo nella navigazione si accetta l’uso dei cookie. 
+         </span>
+         <span id="consent-cookies">
+                Chiudi
+         </span>
+    </div> 
+    <a href="cookiepolicy.html">Informativa</a>
+</div>
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/konvid.js"></script>
+			<script src="assets/js/cookie.js"></script>
+
+		</body>
+		</html>
