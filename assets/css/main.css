@@ -21,7 +21,7 @@ section, summary, time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; 
+  vertical-align: baseline;
   }
 
 article, aside, details, figcaption, figure,
@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
   display: block; }
 
 body {
-  line-height: 1; 
+  line-height: 1;
   }
 
 ol, ul {
@@ -152,13 +152,13 @@ h2 {
   font-size: 1.75em; }
 
 h3 {
-  font-size: 1.25em; 
-  color: #4EA6FF; 
+  font-size: 1.25em;
+  color: #4EA6FF;
   font-family: "Helvetica Neue", serif;
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1.5;
-  margin: 0 0 1em 0; 
+  margin: 0 0 1em 0;
   border-bottom: 1px solid #4EA6FF;
   padding-bottom: 5px; }
 
@@ -1263,6 +1263,12 @@ input[type="radio"] + label:before {
     width: 100%; }
     .image.main img {
       width: 100%; }
+  .image.main.smaller {
+    display: block;
+    margin: 0 0 3em 0;
+    width: 100%; }
+    .image.main.smaller img {
+      width: 50%; }
 
 a.image {
   overflow: hidden; }
@@ -1877,7 +1883,7 @@ button,
   #main > .inner {
     padding: 0 6em 0.1em 6em ;
     margin: 0 auto;
-    max-width: 110em; 
+    max-width: 110em;
     background-color: #021935;}
     #main > .inner > section {
       padding: 6em 0 4em 0 ;
@@ -2353,7 +2359,7 @@ button,
 }
 
 .fixed-footer {
-  width: 90%;
+  width: 70%;
   position: fixed;
   bottom: 0;
   background: rgb(12,48,92);
@@ -2561,6 +2567,7 @@ input[type=range]:focus::-ms-fill-upper {
 .progress-bar span {
   display: inline-block;
   height: 100%;
+  margin-bottom: 10px;
   background-color:lightgray;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -2626,56 +2633,55 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #cookie-banner {
-    padding: 2rem;
-    width: 100%;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
 }
 
 #cookie-banner div {
-    background-color: #4EA6FF;
-    color: #ebf8ff;
-    border-radius: 9999px;
-    padding: 0.5rem 0.75rem;
-    line-height: 1;
-    align-items: center;
-    display: inline-flex;
+  background-color: #4EA6FF;
+  color: #ebf8ff;
+  border-radius: 9999px;
+  padding: 0.5rem 0.75rem;
+  line-height: 1;
+  align-items: center;
+  display: inline-flex;
 }
 
 #cookie-banner div span:first-child {
-
-    text-align: left;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    font-weight: 600;
-    flex: 1 1 auto;
+  text-align: left;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  flex: 1 1 auto;
 }
 
 #cookie-banner div span:second-child {
-    text-align: right;
-    margin-left: 1.5rem;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    font-weight: 700;
-    display: flex;
-    cursor: pointer;
-    border-radius: 9999px;
+  text-align: right;
+  margin-left: 1.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+  display: flex;
+  cursor: pointer;
+  border-radius: 9999px;
 }
 
 #cookie-banner div span:third-child {
-    text-align: right;
-    margin-left: 2.5rem;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    font-weight: 700;
-    display: flex;
-    cursor: pointer;
-    border-radius: 9999px;
+  text-align: right;
+  margin-left: 2.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+  display: flex;
+  cursor: pointer;
+  border-radius: 9999px;
 }
