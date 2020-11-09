@@ -1,46 +1,4 @@
-
-  
 'use strict';
-
-let cookieVersion = 1;
-let cookieDict = {};
-
-function setCookie(cookieData, exdays) {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = "konvidCookie=" + cookieData + ";  expires=" + expires + "; path=/";
-}
-
-function getDataFromCookie(cookieData) {
-    let pairs = cookieData.split("|");
-
-    let dict = {};
-
-    pairs.forEach(cookiePair => {
-        let values = cookiePair.trim().split(">");
-        let key = values[0];
-        if ((key != "version") && (key != "expires") && (key != "path"))
-            if ((values[1] === "true") || (values[1] === "false"))
-                dict[key] = values[1] === "true";
-            else
-                dict[key] = values[1];
-    });
-
-    return dict;
-}
-
-function createDataForCookie(dataDict) {
-    let list = [];
-
-    list.push("version>" + cookieVersion);
-
-    for (let key in dataDict) {
-        list.push(key + ">" + dataDict[key]);
-    }
-
-    return list.join("|");
-}
 
 function getSelectedRadio(radioName) {
     let radioValue = null;
@@ -105,7 +63,6 @@ function calculateR(hasFever, daysBetweenContactAndFever) {
     else if (hasFever === 2)
         return 0.75;
     else
-        // return Math.exp((-Math.pow(-8.0 + daysBetweenContactAndFever, 2.0) / 18.0)) / (3.0 * Math.sqrt(2.0 * Math.PI)) / 0.1329805;
         return Math.pow(1.05, daysBetweenContactAndFever / 2.0 - 1.0) / (extendedFactorial(daysBetweenContactAndFever / 2.0 - 1.0) * Math.exp(1.05)) / 0.404614;
 }
 
@@ -123,8 +80,8 @@ function calculateFL(closedSpace, distance, maxRange) {
     return 1.0 - ((Math.pow(dd / maxRange, 3.0) + dd / maxRange) / 2.0) * 0.5;
 }
 
-function calculateShieldFactor(shield) {
-    return 1.0 - shield / 100.0;
+function calculateShieldFactor(shield, gain) {
+    return 1.0 - Math.min((shield + gain), 100.0) / 100.0;
 }
 
 function calculateL(age) {
@@ -191,8 +148,8 @@ function update() {
         calculateFP(60.0) *
         calculateNE(0.0, maxD) *
         calculateFL(true, 0.0, maxD) *
-        calculateShieldFactor(0.0) *
-        calculateShieldFactor(0.0) *
+        calculateShieldFactor(0.0, 0.0) *
+        calculateShieldFactor(0.0, 0.0) *
         calculateL(100.0);
 
     try {
@@ -283,10 +240,10 @@ function update() {
         fl = calculateFL(closedSpace, actorsDistance, maxD);
 
         killerShield = getSelectedRadio("btnKillerShieldType");
-        fi = calculateShieldFactor(killerShield);
+        fi = calculateShieldFactor(killerShield, ((getSelectedRadio("btnKillerHasFaceShield") === 1) && (killerShield < 90)) ? 5.0 : 0.0);
 
         victimShield = getSelectedRadio("btnVictimShieldType");
-        fc = calculateShieldFactor(victimShield);
+        fc = calculateShieldFactor(victimShield, ((getSelectedRadio("btnVictimHasFaceShield") === 1) && (victimShield < 80)) ? 15.0 : 0.0);
 
         victimAge = document.getElementById("slVictimAge").valueAsNumber;
         L = calculateL(victimAge);
@@ -294,7 +251,7 @@ function update() {
         slText = document.getElementById("slVictimAgeText");
         slText.innerHTML = victimAge + " ann" + ((victimAge == 1) ? "o" : "i");
 
-        realN = R * tu * tm * fp * ne * fl * fi * fc * L /* P */;
+        realN = R * tu * tm * fp * ne * fl * fi * fc * L;
     } catch (exc) {
         realN = maxValue;
     }
@@ -308,78 +265,9 @@ function update() {
     else if (N >= 33.3)
         pB.className = "progress-bar orange glow";
     else
-        pB.className = "progress-bar green glow";
-
-    let isDebug = window.location.search.endsWith("?debug");
-
-    /*
-    if (isDebug)
-        document.querySelector('.progress-value').textContent = N + '%';
-    else
-        document.querySelector('.progress-value').textContent = '';
-    */
-
-    document.getElementById("debug").style.visibility = (debug) ? "visible" : "collapse";
-
-    if (isDebug) {
-        document.getElementById("debug").innerHTML = "<br><br>" +
-            "daysBetweenContactAndFever = " + daysBetweenContactAndFever + "<br>" +
-            "R = " + R + "<br><br>" +
-            "contactDuration = " + contactDuration + "<br>" +
-            "fp = " + fp + "<br><br>" +
-            "actorsDistance = " + actorsDistance + "<br>" +
-            "ne = " + ne + "<br><br>" +
-            "closedSpace = " + closedSpace + "<br>" +
-            "fl = " + fl + "<br>" +
-            "maxD = " + maxD + "<br><br>" +
-            "killerShield = " + killerShield + "<br>" +
-            "fi = " + fi + "<br><br>" +
-            "victimShield = " + victimShield + "<br>" +
-            "fc = " + fc + "<br><br>" +
-            "victimAge = " + victimAge + "<br>" +
-            "L = " + L + "<br><br>" +
-            "daysToVictimContact = " + daysToVictimContact + "<br>" +
-            "tu = " + tu + "<br><br>" +
-            "daysToKillerContact = " + daysToKillerContact + "<br>" +
-            "tm = " + tm + "<br><br>" +
-            "maxValue = " + maxValue + "<br>" +
-            "realN = " + realN;
-    }
-
-    let slElems = document.querySelectorAll('input[type="range"], input[type="range"][list]');
-    slElems.forEach(slElem => {
-        let outputElement = document.getElementById(slElem.id + "Value");
-        outputElement.value = slElem.valueAsNumber;
-        outputElement.style.display = (isDebug) ? "inline" : "none";
-    });
-}
-
-function acceptDisclaimer() {
-    document.getElementById('content').style.display = 'block';
-    document.getElementById('overlay').style.display = 'none';
-    cookieDict["disclaimer"] = true;
-    setCookie(createDataForCookie(cookieDict), 30);
+        pB.className = "progress-bar yellow glow";
 }
 
 function init() {
-    document.getElementById('content').style.display = 'none';
-    document.getElementById('overlay').style.display = 'block';
-
-    let cookieData = document.cookie;
-    if (cookieData !== "") {
-        cookieData.split(';').forEach(cookieElem => {
-            cookieElem = cookieElem.trim();
-            if (!cookieElem.startsWith("konvidCookie"))
-                return;
-
-            cookieDict = getDataFromCookie(cookieElem.replace("konvidCookie=", ""));
-
-            if (!!cookieDict["disclaimer"]) {
-                document.getElementById('content').style.display = 'block';
-                document.getElementById('overlay').style.display = 'none';
-            }
-        });
-    }
-
     update();
 }

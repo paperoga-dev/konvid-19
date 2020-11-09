@@ -7,13 +7,21 @@
 <html lang="it">
 
 <head>
-	<title>Konvid-19</title>
+	<title>Konvid-19 - v1.1.0</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-
 	<link rel='icon' href='favicon.ico' type='image/x-icon' />
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RRRX9X108B"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-RRRX9X108B', { 'anonymize_ip': true });
+	</script>
 </head>
 
 <body class="is-preload">
@@ -38,7 +46,7 @@
 					<p>Compila le informazioni sottostanti e osserva la percentuale di rischio salire o scendere</p>
 					<form>
 						<fieldset>
-							<h3>Stato di salute dell'infetto</h3>
+							<h3>Stato di salute attuale del <b>tuo contatto</b> infetto</h3>
 							<table style="width: 100%;">
 								<tr>
 									<td>
@@ -299,7 +307,37 @@
 											</tr>
 										</table>
 									</td>
-
+								</tr>
+								<tr>
+									<td>
+										<table style="width: 100%; padding: 3px; border-radius: 5px;"
+											class="radio-table">
+											<tr>
+												<td>
+													<b>Aveva la visiera?</b>
+												</td>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnKillerHasFaceShield"
+															id="btnKillerHasFaceShieldNo" value="0" onchange="update()"
+															checked>
+														<label for="btnKillerHasFaceShieldNo">No</label>
+													</div>
+												</td>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnKillerHasFaceShield"
+															id="btnKillerHasFaceShieldYes" value="1"
+															onchange="update()">
+														<label for="btnKillerHasFaceShieldYes">S&igrave;</label>
+													</div>
+												</td>
+												<td style="width: 100%">
+													&nbsp;
+												</td>
+											</tr>
+										</table>
+									</td>
 								</tr>
 								<tr class="spacer">
 									<td></td>
@@ -350,6 +388,38 @@
 										</table>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										<table style="width: 100%; padding: 3px; border-radius: 5px;"
+											class="radio-table">
+											<tr>
+												<td>
+													<b>Avevi la visiera?</b>
+												</td>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnVictimHasFaceShield"
+															id="btnVictimHasFaceShieldNo" value="0" onchange="update()"
+															checked>
+														<label for="btnVictimHasFaceShieldNo">No</label>
+													</div>
+												</td>
+												<td>
+													<div class="radio-container">
+														<input type="radio" name="btnVictimHasFaceShield"
+															id="btnVictimHasFaceShieldYes" value="1"
+															onchange="update()">
+														<label for="btnVictimHasFaceShieldYes">S&igrave;</label>
+													</div>
+												</td>
+												<td style="width: 100%">
+													&nbsp;
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
 							</table>
 						</fieldset>
 						<br><br>
@@ -389,14 +459,12 @@
 
 							</table>
 						</fieldset>
-						<div id="debug">
-						</div>
 
 						<div id="footer-id" class="fixed-footer">
 							<h2>
 								Fattore di rischio<br>
 							</h2>
-							<div id="progress-bar" class="progress-bar green">
+							<div id="progress-bar" class="progress-bar yellow">
 								<span id="progress-done"></span>
 							</div>
 						</div>
@@ -427,6 +495,7 @@
 						<li><a href="disclaimer.html">Disclaimer</a></li>
 						<li><a href="cookiepolicy.html">Cookie Policy</a></li>
 						<li><a href="lamentele.html">Lamentele</a></li>
+						<li><a href="changelog.html">Changelog</a></li>
 					</ul>
 				</nav>
 
