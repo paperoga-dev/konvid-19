@@ -112,6 +112,11 @@ function calculateL(age) {
     return (mL / 100.0) * 0.1 + 1.0;
 }
 
+function translate(locale, key) {
+    let dict = lang_dict[locale] || {};
+    return dict[key] || "";
+}
+
 function update() {
     let tm = null;
     let daysToKillerContact = null;
@@ -181,21 +186,21 @@ function update() {
         slText = document.getElementById("slContactDurationText");
         slText.innerHTML = contactDuration + " minut" + ((contactDuration == 1) ? "o" : "i") + " => ";
         if (contactDuration > 50) {
-            slText.innerHTML += "trovare un parcheggio sotto casa";
+            slText.innerHTML += translate("it_IT", "frasi_1");
         } else if (contactDuration > 40) {
-            slText.innerHTML += "rapporto sessuale in un film porno";
+            slText.innerHTML += translate("it_IT", "frasi_2");
         } else if (contactDuration > 30) {
-            slText.innerHTML += "antivax che ti spiega del mercurio nei vaccini";
+            slText.innerHTML += translate("it_IT", "frasi_3");
         } else if (contactDuration > 20) {
-            slText.innerHTML += "cottura al microonde di lasagne congelate";
+            slText.innerHTML += translate("it_IT", "frasi_4");
         } else if (contactDuration > 10) {
-            slText.innerHTML += "durata di una pubblicit&agrave; di un programma per bambini";
+            slText.innerHTML += translate("it_IT", "frasi_5");
         } else if (contactDuration > 5) {
-            slText.innerHTML += "ricordarti dove hai messo la mascherina";
+            slText.innerHTML += translate("it_IT", "frasi_6");
         } else if (contactDuration > 2) {
-            slText.innerHTML += "rapporto sessuale di un maschio medio";
+            slText.innerHTML += translate("it_IT", "frasi_7");
         } else {
-            slText.innerHTML += "vedere l'ex da lontano e fuggire";
+            slText.innerHTML += translate("it_IT", "frasi_8");
         }
 
         let aD = document.getElementById("slActorsDistance").valueAsNumber;
@@ -219,21 +224,21 @@ function update() {
         }
         slText.innerHTML += "=> ";
         if (origAD > 500) {
-            slText.innerHTML += "incrociare il proprio capo";
+            slText.innerHTML += translate("it_IT", "frasi_9");
         } else if (origAD > 400) {
-            slText.innerHTML += "incrociare punkabbestia sotto ketamina con pitbull ringhiante";
+            slText.innerHTML += translate("it_IT", "frasi_10");
         } else if (origAD > 300) {
-            slText.innerHTML += "dirimpettaia che parla male della portinaia";
+            slText.innerHTML += translate("it_IT", "frasi_11");
         } else if (origAD > 200) {
-            slText.innerHTML += "mi scusi... crede nella vita dopo la morte?";
+            slText.innerHTML += translate("it_IT", "frasi_12");
         } else if (origAD > 100) {
-            slText.innerHTML += "mi fai questa fotocopia?";
+            slText.innerHTML += translate("it_IT", "frasi_13");
         } else if (origAD > 50) {
-            slText.innerHTML += "sgomitatore in metropolitana";
+            slText.innerHTML += translate("it_IT", "frasi_14");
         } else if (origAD > 10) {
-            slText.innerHTML += "strizzargli un punto nero sul naso";
+            slText.innerHTML += translate("it_IT", "frasi_15");
         } else {
-            slText.innerHTML += "giochiamo ad annoda-lingue?";
+            slText.innerHTML += translate("it_IT", "frasi_16");
         }
 
         closedSpace = getSelectedRadio("btnPlaceType");
@@ -268,6 +273,15 @@ function update() {
         pB.className = "progress-bar yellow glow";
 }
 
+function updateLang() {
+    let items = document.querySelectorAll('[data-lang]');
+
+    for (let item of items) {
+        item.innerHTML = lang_dict["it_IT"][item.getAttribute('data-lang')]
+    }
+}
+
 function init() {
+    updateLang();
     update();
 }

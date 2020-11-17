@@ -28,7 +28,7 @@
 	</script>
 </head>
 
-<body class="is-preload">
+<body class="is-preload" onload="updateLang();">
 
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -74,22 +74,22 @@
 				<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>Menu</h2>
+						<h2><span data-lang="sidebar_0"></span></h2>
 					</header>
 					<ul>
-						<li><a href="index.html">Homepage</a></li>
-						<li><a href="tool.html">Calcola il tuo rischio di contagio</a></li>
-						<li><a href="documentazione.html">Documentazione</a></li>
-						<li><a href="disclaimer.html">Disclaimer</a></li>
-						<li><a href="cookiepolicy.html">Cookie Policy</a></li>
-						<li><a href="lamentele.html">Lamentele</a></li>
-						<li><a href="changelog.html">Changelog</a></li>
+						<li><a href="index.html"><span data-lang="sidebar_1"></span></a></li>
+						<li><a href="tool.html"><span data-lang="sidebar_2"></span></a></li>
+						<li><a href="documentazione.html"><span data-lang="sidebar_3"></span></a></li>
+						<li><a href="disclaimer.html"><span data-lang="sidebar_4"></span></a></li>
+						<li><a href="cookiepolicy.html"><span data-lang="sidebar_5"></span></a></li>
+						<li><a href="lamentele.html"><span data-lang="sidebar_6"></span></a></li>
+						<li><a href="changelog.html"><span data-lang="sidebar_7"></span></a></li>
 					</ul>
 				</nav>
 
 				<!-- Footer -->
 				<footer id="footer">
-					<p class="copyright">&copy; Kon-igi & Co. Tutti i diritti riservati. <br>Design: <a
+					<p class="copyright">&copy;&nbsp;<span data-lang="sidebar_8"></span><br>Design: <a
 							href="https://html5up.net">HTML5 UP</a>.</p>
 				</footer>
 
@@ -99,17 +99,13 @@
 	</div>
 	<div class="hidden" id="cookie-banner">
 		<div>
-			<span>
-				Questo sito fa uso di cookie per migliorare l’esperienza di navigazione degli utenti. Proseguendo nella
-				navigazione si accetta l’uso dei cookie.
-			</span>
-			<span id="consent-cookies">
-				Chiudi
-			</span>
+			<span data-lang="sidebar_9"></span>
+			<span id="consent-cookies" data-lang="sidebar_10"></span>
 		</div>
-		<a href="cookiepolicy.html">Informativa</a>
+		<a href="cookiepolicy.html"><span data-lang="sidebar_11"></span></a>
 	</div>
 	<!-- Scripts -->
+	<script src="assets/js/lang/it_IT.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>

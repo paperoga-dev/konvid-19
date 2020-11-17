@@ -28,7 +28,7 @@
 	</script>
 </head>
 
-<body class="is-preload">
+<body class="is-preload" onload="updateLang();">
 
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -47,17 +47,17 @@
 					<header class="main">
 
 					</header>
-					<p>Compila le informazioni sottostanti e osserva la percentuale di rischio salire o scendere</p>
+					<p><span data-lang="tool_1"></span></p>
 					<form>
 						<fieldset>
-							<h3>Stato di salute attuale del <b>tuo contatto</b> infetto</h3>
+							<h3><span data-lang="tool_2"></span></h3>
 							<table style="width: 100%;">
 								<tr>
 									<td>
 										<table style="width: 100%;" class="radio-table">
 											<tr>
 												<td>
-													<b>Ha i sintomi (tosse e/o febbre)?</b><br />&nbsp;
+													<b><span data-lang="tool_3"></span></b><br />&nbsp;
 												</td>
 											</tr>
 											<tr>
@@ -66,13 +66,16 @@
 														<input type="radio" name="btnKillerHasFever"
 															id="btnKillerHasFeverYes" value="1" onchange="update()"
 															checked>
-														<label for="btnKillerHasFeverYes">S&igrave;</label>
+														<label for="btnKillerHasFeverYes"><span
+																data-lang="tool_4"></span></label>
 														<input type="radio" name="btnKillerHasFever"
 															id="btnKillerHasFeverNo" value="0" onchange="update()">
-														<label for="btnKillerHasFeverNo">No</label>
+														<label for="btnKillerHasFeverNo"><span
+																data-lang="tool_5"></span></label>
 														<input type="radio" name="btnKillerHasFever"
 															id="btnKillerHasFeverDNK" value="2" onchange="update()">
-														<label for="btnKillerHasFeverDNK">Non lo so</label>
+														<label for="btnKillerHasFeverDNK"><span
+																data-lang="tool_6"></span></label>
 													</div>
 												</td>
 											</tr>
@@ -89,7 +92,7 @@
 													<table style="width: 100%; padding: 3px; border-radius: 5px;">
 														<tr>
 															<td>
-																<b>Quando li ha manifestati?</b>
+																<b><span data-lang="tool_7"></span></b>
 															</td>
 														</tr>
 														<tr>
@@ -105,8 +108,6 @@
 																		step="1" id="slDaysBetweenContactAndFever"
 																		oninput="update()"
 																		list="slDaysBetweenContactAndFeverList">
-																	<output id="slDaysBetweenContactAndFeverValue"
-																		for="slDaysBetweenContactAndFever">0</output>
 																	<datalist class="sliderticks"
 																		id="slDaysBetweenContactAndFeverList">
 																		<option style="font-weight: bold;"> 9 giorni
@@ -129,14 +130,14 @@
 
 
 						<fieldset>
-							<H3>Contatto tra te e l'infetto</H3>
+							<h3><span data-lang="tool_8"></span></h3>
 							<table style="width: 100%;">
 								<tr>
 									<td>
 										<table style="width: 100%; padding: 3px; border-radius: 5px;">
 											<tr>
 												<td>
-													<b>Per quanto tempo sei stato con l'infetto (minuti)?</b>
+													<b><span data-lang="tool_9"></span></b>
 												</td>
 											</tr>
 											<tr>
@@ -149,8 +150,6 @@
 														<input style="background-color: #021935;" type="range" min="0"
 															max="60" value="30" step="1" id="slContactDuration"
 															list="slContactDurationList" oninput="update()">
-														<output id="slContactDurationValue"
-															for="slContactDuration">0</output>
 														<datalist class="sliderticks" id="slContactDurationList">
 															<option>0</option>
 															<option>10</option>
@@ -177,7 +176,7 @@
 										<table style="width: 100%; padding: 3px; border-radius: 5px;">
 											<tr>
 												<td>
-													<b>A quale distanza, in media (centimetri)?</b>
+													<b><span data-lang="tool_10"></span></b>
 												</td>
 											</tr>
 											<tr>
@@ -190,8 +189,6 @@
 														<input style="background-color: #021935;" type="range" min="0"
 															max="600" value="80" step="1" id="slActorsDistance"
 															list="slActorsDistanceList" oninput="update()">
-														<output id="slActorsDistanceValue"
-															for="slActorsDistance">0</output>
 														<datalist class="sliderticks" id="slActorsDistanceList">
 															<option>0</option>
 															<option>100</option>
@@ -217,20 +214,23 @@
 										<table style="width: 100%;" class="radio-table">
 											<tr>
 												<td>
-													<b>L'infetto:</b>
+													<b><span data-lang="tool_11"></span></b>
 												</td>
 												<td>
 													<div class="radio-container">
 														<input type="radio" name="btnKillerAction"
 															id="btnKillerActionSpeaks" value="100" onchange="update()"
 															checked>
-														<label for="btnKillerActionSpeaks">parla</label>
+														<label for="btnKillerActionSpeaks"><span
+																data-lang="tool_12"></span></label>
 														<input type="radio" name="btnKillerAction"
 															id="btnKillerActionCoughs" value="200" onchange="update()">
-														<label for="btnKillerActionCoughs">tossisce</label>
+														<label for="btnKillerActionCoughs"><span
+																data-lang="tool_13"></span></label>
 														<input type="radio" name="btnKillerAction"
 															id="btnKillerActionSneezes" value="600" onchange="update()">
-														<label for="btnKillerActionSneezes">starnutisce</label>
+														<label for="btnKillerActionSneezes"><span
+																data-lang="tool_14"></span></label>
 													</div>
 												</td>
 											</tr>
@@ -246,16 +246,18 @@
 										<table style="width: 100%;" class="radio-table">
 											<tr>
 												<td>
-													<b>Luogo del contatto:</b>
+													<b><span data-lang="tool_15"></span></b>
 												</td>
 												<td>
 													<div class="radio-container">
 														<input type="radio" name="btnPlaceType" id="btnPlaceTypeIndoor"
 															value="1" onchange="update()" checked>
-														<label for="btnPlaceTypeIndoor">Al chiuso</label>
+														<label for="btnPlaceTypeIndoor"><span
+																data-lang="tool_16"></span></label>
 														<input type="radio" name="btnPlaceType" id="btnPlaceTypeOutdoor"
 															value="0" onchange="update()">
-														<label for="btnPlaceTypeOutdoor">All'aperto</label>
+														<label for="btnPlaceTypeOutdoor"><span
+																data-lang="tool_17"></span></label>
 													</div>
 												</td>
 											</tr>
@@ -272,7 +274,7 @@
 										<table style="width: 100%; padding: 3px; border-radius: 5px;">
 											<tr>
 												<td>
-													<b>Dispositivo di protezione dell'infetto:</b>
+													<b><span data-lang="tool_18"></span></b>
 												</td>
 											</tr>
 											<tr>
@@ -281,31 +283,36 @@
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeNone" value="0" onchange="update()"
 															checked>
-														<label for="btnKillerShieldTypeNone">Nessuno</label>
+														<label for="btnKillerShieldTypeNone"><span
+																data-lang="tool_19"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeScarf" value="40"
 															onchange="update()">
-														<label for="btnKillerShieldTypeScarf">Sciarpa</label>
+														<label for="btnKillerShieldTypeScarf"><span
+																data-lang="tool_20"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeSurgical" value="50"
 															onchange="update()">
-														<label for="btnKillerShieldTypeSurgical">Chirurgica</label>
+														<label for="btnKillerShieldTypeSurgical"><span
+																data-lang="tool_21"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeFPP2" value="95" onchange="update()">
-														<label for="btnKillerShieldTypeFPP2">FPP2</label>
+														<label for="btnKillerShieldTypeFPP2"><span
+																data-lang="tool_22"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeValvedFPP2" value="30"
 															onchange="update()">
-														<label for="btnKillerShieldTypeValvedFPP2">FPP2 con
-															valvola</label>
+														<label for="btnKillerShieldTypeValvedFPP2"><span
+																data-lang="tool_23"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeFPP3" value="98" onchange="update()">
-														<label for="btnKillerShieldTypeFPP3">FPP3</label>
+														<label for="btnKillerShieldTypeFPP3"><span
+																data-lang="tool_24"></span></label>
 														<input type="radio" name="btnKillerShieldType"
 															id="btnKillerShieldTypeValvedFPP3" value="30"
 															onchange="update()">
-														<label for="btnKillerShieldTypeValvedFPP3">FPP3 con
-															valvola</label>
+														<label for="btnKillerShieldTypeValvedFPP3"><span
+																data-lang="tool_25"></span></label>
 													</div>
 												</td>
 											</tr>
@@ -318,14 +325,15 @@
 											class="radio-table">
 											<tr>
 												<td>
-													<b>Aveva la visiera?</b>
+													<b><span data-lang="tool_26"></span></b>
 												</td>
 												<td>
 													<div class="radio-container">
 														<input type="radio" name="btnKillerHasFaceShield"
 															id="btnKillerHasFaceShieldNo" value="0" onchange="update()"
 															checked>
-														<label for="btnKillerHasFaceShieldNo">No</label>
+														<label for="btnKillerHasFaceShieldNo"><span
+																data-lang="tool_5"></span></label>
 													</div>
 												</td>
 												<td>
@@ -333,7 +341,8 @@
 														<input type="radio" name="btnKillerHasFaceShield"
 															id="btnKillerHasFaceShieldYes" value="1"
 															onchange="update()">
-														<label for="btnKillerHasFaceShieldYes">S&igrave;</label>
+														<label for="btnKillerHasFaceShieldYes"><span
+																data-lang="tool_4"></span></label>
 													</div>
 												</td>
 												<td style="width: 100%">
@@ -352,7 +361,7 @@
 										<table style="width: 100%; padding: 3px; border-radius: 5px;">
 											<tr>
 												<td>
-													<b>Tuo dispositivo di protezione:</b>
+													<b><span data-lang="tool_27"></span></b>
 												</td>
 											</tr>
 											<tr>
@@ -361,31 +370,36 @@
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeNone" value="0" onchange="update()"
 															checked>
-														<label for="btnVictimShieldTypeNone">Nessuno</label>
+														<label for="btnVictimShieldTypeNone"><span
+																data-lang="tool_19"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeScarf" value="10"
 															onchange="update()">
-														<label for="btnVictimShieldTypeScarf">Sciarpa</label>
+														<label for="btnVictimShieldTypeScarf"><span
+																data-lang="tool_20"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeSurgical" value="20"
 															onchange="update()">
-														<label for="btnVictimShieldTypeSurgical">Chirurgica</label>
+														<label for="btnVictimShieldTypeSurgical"><span
+																data-lang="tool_21"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeFPP2" value="95" onchange="update()">
-														<label for="btnVictimShieldTypeFPP2">FPP2</label>
+														<label for="btnVictimShieldTypeFPP2"><span
+																data-lang="tool_22"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeValvedFPP2" value="95"
 															onchange="update()">
-														<label for="btnVictimShieldTypeValvedFPP2">FPP2 con
-															valvola</label>
+														<label for="btnVictimShieldTypeValvedFPP2"><span
+																data-lang="tool_23"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeFPP3" value="98" onchange="update()">
-														<label for="btnVictimShieldTypeFPP3">FPP3</label>
+														<label for="btnVictimShieldTypeFPP3"><span
+																data-lang="tool_24"></span></label>
 														<input type="radio" name="btnVictimShieldType"
 															id="btnVictimShieldTypeValvedFPP3" value="98"
 															onchange="update()">
-														<label for="btnVictimShieldTypeValvedFPP3">FPP3 con
-															valvola</label>
+														<label for="btnVictimShieldTypeValvedFPP3"><span
+																data-lang="tool_25"></span></label>
 													</div>
 												</td>
 											</tr>
@@ -398,14 +412,15 @@
 											class="radio-table">
 											<tr>
 												<td>
-													<b>Avevi la visiera?</b>
+													<b><span data-lang="tool_28"></span></b>
 												</td>
 												<td>
 													<div class="radio-container">
 														<input type="radio" name="btnVictimHasFaceShield"
 															id="btnVictimHasFaceShieldNo" value="0" onchange="update()"
 															checked>
-														<label for="btnVictimHasFaceShieldNo">No</label>
+														<label for="btnVictimHasFaceShieldNo"><span
+																data-lang="tool_5"></span></label>
 													</div>
 												</td>
 												<td>
@@ -413,7 +428,8 @@
 														<input type="radio" name="btnVictimHasFaceShield"
 															id="btnVictimHasFaceShieldYes" value="1"
 															onchange="update()">
-														<label for="btnVictimHasFaceShieldYes">S&igrave;</label>
+														<label for="btnVictimHasFaceShieldYes"><span
+																data-lang="tool_4"></span></label>
 													</div>
 												</td>
 												<td style="width: 100%">
@@ -430,7 +446,7 @@
 
 
 						<fieldset>
-							<h3>La tua et&agrave;</h3>
+							<h3><span data-lang="tool_29"></span></h3>
 							<table style="width: 100%;">
 								<tr>
 									<td id="slVictimAgeText" style="text-align: center;">
@@ -442,7 +458,6 @@
 											<input style="background-color: #021935" type="range" min="0" max="100"
 												value="50" step="1" id="slVictimAge" list="slVictimAgeList"
 												oninput="update()">
-											<output id="slVictimAgeValue" for="slVictimAge">0</output>
 											<datalist class="sliderticks" id="slVictimAgeList">
 												<option>0</option>
 												<option>20</option>
@@ -466,7 +481,7 @@
 
 						<div id="footer-id" class="fixed-footer">
 							<h2>
-								Fattore di rischio<br>
+								<span data-lang="tool_30"></span><br>
 							</h2>
 							<div id="progress-bar" class="progress-bar yellow">
 								<span id="progress-done"></span>
@@ -490,22 +505,22 @@
 				<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>Menu</h2>
+						<h2><span data-lang="sidebar_0"></span></h2>
 					</header>
 					<ul>
-						<li><a href="index.html">Homepage</a></li>
-						<li><a href="tool.html">Calcola il tuo rischio di contagio</a></li>
-						<li><a href="documentazione.html">Documentazione</a></li>
-						<li><a href="disclaimer.html">Disclaimer</a></li>
-						<li><a href="cookiepolicy.html">Cookie Policy</a></li>
-						<li><a href="lamentele.html">Lamentele</a></li>
-						<li><a href="changelog.html">Changelog</a></li>
+						<li><a href="index.html"><span data-lang="sidebar_1"></span></a></li>
+						<li><a href="tool.html"><span data-lang="sidebar_2"></span></a></li>
+						<li><a href="documentazione.html"><span data-lang="sidebar_3"></span></a></li>
+						<li><a href="disclaimer.html"><span data-lang="sidebar_4"></span></a></li>
+						<li><a href="cookiepolicy.html"><span data-lang="sidebar_5"></span></a></li>
+						<li><a href="lamentele.html"><span data-lang="sidebar_6"></span></a></li>
+						<li><a href="changelog.html"><span data-lang="sidebar_7"></span></a></li>
 					</ul>
 				</nav>
 
 				<!-- Footer -->
 				<footer id="footer">
-					<p class="copyright">&copy; Kon-igi & Co. Tutti i diritti riservati. <br>Design: <a
+					<p class="copyright">&copy;&nbsp;<span data-lang="sidebar_8"></span><br>Design: <a
 							href="https://html5up.net">HTML5
 							UP</a>.</p>
 				</footer>
@@ -518,17 +533,13 @@
 
 	<div class="hidden" id="cookie-banner">
 		<div>
-			<span>
-				Questo sito fa uso di cookie per migliorare l’esperienza di navigazione degli utenti. Proseguendo nella
-				navigazione si accetta l’uso dei cookie.
-			</span>
-			<span id="consent-cookies">
-				Chiudi
-			</span>
+			<span data-lang="sidebar_9"></span>
+			<span id="consent-cookies" data-lang="sidebar_10"></span>
 		</div>
-		<a href="cookiepolicy.html">Informativa</a>
+		<a href="cookiepolicy.html"><span data-lang="sidebar_11"></span></a>
 	</div>
 	<!-- Scripts -->
+	<script src="assets/js/lang/it_IT.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>
