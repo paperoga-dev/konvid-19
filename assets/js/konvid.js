@@ -117,6 +117,113 @@ function translate(locale, key) {
     return dict[key] || "";
 }
 
+function translateDays(value) {
+    let res = "";
+    if (value < -1) {
+        switch (language) {
+            case "it": return -value + " giorni <b>prima</b> del vostro contatto";
+            case "fr": return -value + " jours <b>avant</b> de vôtre contact";
+
+            default: return -value + " days <b>before</b> your meeting";
+        }
+    } else if (value === -1) {
+        switch (language) {
+            case "it": return "il giorno <b>prima</b> del vostro contatto";
+            case "fr": return "le jour <b>avant</b> de vôtre contact";
+
+            default: return "the day <b>before</b> your meeting";
+        }
+    } else if (value === 0) {
+        switch (language) {
+            case "it": return "<b>il giorno in cui lo hai incontrato</b>";
+            case "fr": return "<b>le jour que vous vous êtes rencontré</b>";
+
+            default: return "<b>the same day of your meeting</b>";
+        }
+    } else if (value === 1) {
+        switch (language) {
+            case "it": return "il giorno <b>dopo</b> il vostro contatto";
+            case "fr": return "le jour <b>aprés</b> le contact";
+
+            default: return "the day <b>after</b> your meeting";
+        }
+    } else {
+        switch (language) {
+            case "it": return daysBetweenContactAndFever + " giorni <b>dopo</b> il vostro contatto";
+            case "fr": return daysBetweenContactAndFever + " jours <b>aprés</b> le contact";
+
+            default: return daysBetweenContactAndFever + " days <b>after</b> your meeting";
+        }
+    }
+}
+
+function translateDistance(value) {
+    if (value === 0) {
+        switch (language) {
+            case "it": return "distanza zero ";
+            case "fr": return "distance nulle";
+
+            default: return "no distance";
+        }
+    } else {
+        let res = "";
+
+        if (value >= 100) {
+            let meters = Math.trunc(value / 100);
+            value = value - meters * 100;
+
+            switch (language) {
+                case "it":
+                    res = meters + " metr" + ((meters == 1) ? "o" : "i") + " ";
+                    break;
+
+                case "fr":
+                    res = meters + " mètre" + ((meters == 1) ? "" : "s") + " ";
+                    break;
+
+                default:
+                    res = meters + " meter" + ((meters == 1) ? "" : "s") + " ";
+                    break;
+            }
+        }
+        if (value !== 0) {
+            switch (language) {
+                case "it":
+                    res += value + " centimetr" + ((value == 1) ? "o" : "i");
+                    break;
+
+                case "fr":
+                    res += value + " centimètre" + ((value == 1) ? "" : "s");
+                    break;
+
+                default:
+                    res += value + " centimeter" + ((value == 1) ? "" : "s");
+                    break;
+            }
+        }
+
+        return res;
+    }
+}
+
+function translateTime(value) {
+    switch (language) {
+        case "it": return value + " minut" + ((value == 1) ? "o" : "i");
+        case "fr": return value + " minute" + ((value == 1) ? "" : "s");
+
+        default: return value + " minut" + ((value == 1) ? "e" : "es");
+    }
+}
+
+function translateAge(value) {
+    switch (language) {
+        case "it": return value + " ann" + ((value == 1) ? "o" : "i");
+        case "fr": return value + " an" + ((value == 1) ? "" : "s");
+
+        default: return value = " year" + ((value == 1) ? "" : "s");
+    }
+}
+
 function update() {
     let tm = null;
     let daysToKillerContact = null;
@@ -168,39 +275,33 @@ function update() {
         document.getElementById("rowDaysBetweenContactAndFever").setAttribute("className", (hasFever === 1) ? "" : "row_hidden");
 
         let slText = document.getElementById("slDaysBetweenContactAndFeverText");
-        if (daysBetweenContactAndFever < -1) {
-            slText.innerHTML = -daysBetweenContactAndFever + " giorni <b>prima</b> del vostro contatto";
-        } else if (daysBetweenContactAndFever === -1) {
-            slText.innerHTML = "il giorno <b>prima</b> del vostro contatto";
-        } else if (daysBetweenContactAndFever === 0) {
-            slText.innerHTML = "<b>il giorno in cui lo hai incontrato</b>";
-        } else if (daysBetweenContactAndFever === 1) {
-            slText.innerHTML = "il giorno <b>dopo</b> il vostro contatto";
-        } else {
-            slText.innerHTML = daysBetweenContactAndFever + " giorni <b>dopo</b> il vostro contatto";
-        }
+        slText.innerHTML = translateDays(daysBetweenContactAndFever);
 
         contactDuration = document.getElementById("slContactDuration").valueAsNumber;
         fp = calculateFP(contactDuration);
 
         slText = document.getElementById("slContactDurationText");
-        slText.innerHTML = contactDuration + " minut" + ((contactDuration == 1) ? "o" : "i") + " => ";
+        slText.innerHTML = translateTime(contactDuration);
+        let funnySentence = null;
         if (contactDuration > 50) {
-            slText.innerHTML += translate("it_IT", "frasi_1");
+            funnySentence = translate(language, "frasi_1");
         } else if (contactDuration > 40) {
-            slText.innerHTML += translate("it_IT", "frasi_2");
+            funnySentence = translate(language, "frasi_2");
         } else if (contactDuration > 30) {
-            slText.innerHTML += translate("it_IT", "frasi_3");
+            funnySentence = translate(language, "frasi_3");
         } else if (contactDuration > 20) {
-            slText.innerHTML += translate("it_IT", "frasi_4");
+            funnySentence = translate(language, "frasi_4");
         } else if (contactDuration > 10) {
-            slText.innerHTML += translate("it_IT", "frasi_5");
+            funnySentence = translate(language, "frasi_5");
         } else if (contactDuration > 5) {
-            slText.innerHTML += translate("it_IT", "frasi_6");
+            funnySentence = translate(language, "frasi_6");
         } else if (contactDuration > 2) {
-            slText.innerHTML += translate("it_IT", "frasi_7");
+            funnySentence = translate(language, "frasi_7");
         } else {
-            slText.innerHTML += translate("it_IT", "frasi_8");
+            funnySentence = translate(language, "frasi_8");
+        }
+        if (funnySentence !== null) {
+            slText.innerHTML += " => " + funnySentence;
         }
 
         let aD = document.getElementById("slActorsDistance").valueAsNumber;
@@ -209,36 +310,27 @@ function update() {
         ne = calculateNE(actorsDistance, maxD);
 
         slText = document.getElementById("slActorsDistanceText");
-        slText.innerHTML = "";
-        if (aD === 0) {
-            slText.innerHTML += "distanza zero ";
-        } else {
-            if (aD >= 100) {
-                let meters = Math.trunc(aD / 100);
-                aD = aD - meters * 100;
-                slText.innerHTML = meters + " metr" + ((meters == 1) ? "o" : "i") + " ";
-            }
-            if (aD !== 0) {
-                slText.innerHTML += aD + " centimetr" + ((aD == 1) ? "o" : "i") + " ";
-            }
-        }
-        slText.innerHTML += "=> ";
+        slText.innerHTML = translateDistance(aD);
+        funnySentence = null;
         if (origAD > 500) {
-            slText.innerHTML += translate("it_IT", "frasi_9");
+            funnySentence = translate(language, "frasi_9");
         } else if (origAD > 400) {
-            slText.innerHTML += translate("it_IT", "frasi_10");
+            funnySentence = translate(language, "frasi_10");
         } else if (origAD > 300) {
-            slText.innerHTML += translate("it_IT", "frasi_11");
+            funnySentence = translate(language, "frasi_11");
         } else if (origAD > 200) {
-            slText.innerHTML += translate("it_IT", "frasi_12");
+            funnySentence = translate(language, "frasi_12");
         } else if (origAD > 100) {
-            slText.innerHTML += translate("it_IT", "frasi_13");
+            funnySentence = translate(language, "frasi_13");
         } else if (origAD > 50) {
-            slText.innerHTML += translate("it_IT", "frasi_14");
+            funnySentence = translate(language, "frasi_14");
         } else if (origAD > 10) {
-            slText.innerHTML += translate("it_IT", "frasi_15");
+            funnySentence = translate(language, "frasi_15");
         } else {
-            slText.innerHTML += translate("it_IT", "frasi_16");
+            funnySentence = translate(language, "frasi_16");
+        }
+        if (funnySentence !== null) {
+            slText.innerHTML += " => " + funnySentence;
         }
 
         closedSpace = getSelectedRadio("btnPlaceType");
@@ -254,7 +346,7 @@ function update() {
         L = calculateL(victimAge);
 
         slText = document.getElementById("slVictimAgeText");
-        slText.innerHTML = victimAge + " ann" + ((victimAge == 1) ? "o" : "i");
+        slText.innerHTML = translateAge(victimAge);
 
         realN = R * tu * tm * fp * ne * fl * fi * fc * L;
     } catch (exc) {
@@ -274,11 +366,31 @@ function update() {
 }
 
 function updateLang() {
+    if (language === "") {
+        language = getFirstBrowserLanguage().split("_")[0];
+    }
+
+    if (!(language in lang_dict)) {
+        language = "en";
+    }
+
     let items = document.querySelectorAll('[data-lang]');
 
     for (let item of items) {
-        item.innerHTML = lang_dict["it_IT"][item.getAttribute('data-lang')]
+        item.innerHTML = lang_dict[language][item.getAttribute('data-lang')] || lang_dict["en"][item.getAttribute('data-lang')]
     }
+}
+
+function switchLanguage(newLanguage) {
+    language = newLanguage;
+
+    if (!(language in lang_dict)) {
+        language = "en";
+    }
+
+    setCookie("konvid-language", language, 365);
+
+    location.reload();
 }
 
 function init() {

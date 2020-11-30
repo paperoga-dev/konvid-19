@@ -2,7 +2,7 @@ if (typeof lang_dict === "undefined") {
     var lang_dict = {}
 }
 
-lang_dict["it_IT"] = {
+lang_dict["it"] = {
     "index_1": "Konvid-19 è un piccolo tool che ti permette di calcolare la percentuale di rischio di essere infettato incontrando(o avendo incontrato) una persona ammalata di Covid- 19, o che potrebbe esserne affetta.",
     "index_2": "Konvid-19 <b>non sostituisce nella maniera più; assoluta il consiglio del tuo Medico Curante</b> ma grazie ad alcuni parametri che inserirai e che simuleranno il tuo contatto con una persona malata, ti aiuterà a capire quanto la distanza, il tempo o l'utilizzo o meno della mascherina possano contribuire a proteggerti oppure ad aumentare il rischio di essere contagiato.",
     "index_3": "Leggi tutto il disclaimer",
@@ -90,6 +90,8 @@ lang_dict["it_IT"] = {
     "tool_28": "Avevi la visiera?",
     "tool_29": "La tua età",
     "tool_30": "Fattore di rischio",
+    "tool_31": "9 giorni prima",
+    "tool_32": "3 giorni dopo",
     "frasi_1": "trovare un parcheggio sotto casa",
     "frasi_2": "rapporto sessuale in un film porno",
     "frasi_3": "antivax che ti spiega del mercurio nei vaccini",

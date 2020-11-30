@@ -2685,3 +2685,14 @@ input[type=range]:focus::-ms-fill-upper {
   cursor: pointer;
   border-radius: 9999px;
 }
+
+.fake-link {
+  cursor: pointer;
+}
+
+.rotated-text {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  display: inline-block;
+}
