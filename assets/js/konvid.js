@@ -123,6 +123,7 @@ function translateDays(value) {
         switch (language) {
             case "it": return -value + " giorni <b>prima</b> del vostro contatto";
             case "fr": return -value + " jours <b>avant</b> de vôtre contact";
+            case "de": return -value + " Tage <b>vor</b> eurer Begegnung";
 
             default: return -value + " days <b>before</b> your meeting";
         }
@@ -130,6 +131,7 @@ function translateDays(value) {
         switch (language) {
             case "it": return "il giorno <b>prima</b> del vostro contatto";
             case "fr": return "le jour <b>avant</b> de vôtre contact";
+            case "de": return "am Tag <b>vor</b> eurer Begegnung";
 
             default: return "the day <b>before</b> your meeting";
         }
@@ -137,6 +139,7 @@ function translateDays(value) {
         switch (language) {
             case "it": return "<b>il giorno in cui lo hai incontrato</b>";
             case "fr": return "<b>le jour que vous vous êtes rencontré</b>";
+            case "de": return "<b>am Tag der Begegnung</b>";
 
             default: return "<b>the same day of your meeting</b>";
         }
@@ -144,6 +147,7 @@ function translateDays(value) {
         switch (language) {
             case "it": return "il giorno <b>dopo</b> il vostro contatto";
             case "fr": return "le jour <b>aprés</b> le contact";
+            case "de": return "am Tag <b>nach</b> eurer Begegnung";
 
             default: return "the day <b>after</b> your meeting";
         }
@@ -151,6 +155,7 @@ function translateDays(value) {
         switch (language) {
             case "it": return daysBetweenContactAndFever + " giorni <b>dopo</b> il vostro contatto";
             case "fr": return daysBetweenContactAndFever + " jours <b>aprés</b> le contact";
+            case "de": return daysBetweenContactAndFever + " Tage <b>nach</b> eurer Begegnung";
 
             default: return daysBetweenContactAndFever + " days <b>after</b> your meeting";
         }
@@ -162,6 +167,7 @@ function translateDistance(value) {
         switch (language) {
             case "it": return "distanza zero ";
             case "fr": return "distance nulle";
+            case "de": return "Null Abstand";
 
             default: return "no distance";
         }
@@ -181,6 +187,10 @@ function translateDistance(value) {
                     res = meters + " mètre" + ((meters == 1) ? "" : "s") + " ";
                     break;
 
+                case "de":
+                    res = meters + " Meter ";
+                    break;
+
                 default:
                     res = meters + " meter" + ((meters == 1) ? "" : "s") + " ";
                     break;
@@ -194,6 +204,10 @@ function translateDistance(value) {
 
                 case "fr":
                     res += value + " centimètre" + ((value == 1) ? "" : "s");
+                    break;
+
+                case "de":
+                    res += value + " Zentimeter";
                     break;
 
                 default:
@@ -210,6 +224,7 @@ function translateTime(value) {
     switch (language) {
         case "it": return value + " minut" + ((value == 1) ? "o" : "i");
         case "fr": return value + " minute" + ((value == 1) ? "" : "s");
+        case "de": return value + " Minute" + ((value == 1) ? "" : "n");
 
         default: return value + " minut" + ((value == 1) ? "e" : "es");
     }
@@ -219,18 +234,13 @@ function translateAge(value) {
     switch (language) {
         case "it": return value + " ann" + ((value == 1) ? "o" : "i");
         case "fr": return value + " an" + ((value == 1) ? "" : "s");
+        case "de": return value + " Jahr" + ((value == 1) ? "" : "e");
 
         default: return value = " year" + ((value == 1) ? "" : "s");
     }
 }
 
 function update() {
-    let tm = null;
-    let daysToKillerContact = null;
-
-    let tu = null;
-    let daysToVictimContact = null;
-
     let R = null;
     let daysBetweenContactAndFever = null;
 
@@ -265,9 +275,6 @@ function update() {
         calculateL(100.0);
 
     try {
-        tm = 1.0;
-        tu = 1.0;
-
         let hasFever = getSelectedRadio("btnKillerHasFever");
         daysBetweenContactAndFever = document.getElementById("slDaysBetweenContactAndFever").valueAsNumber;
         R = calculateR(hasFever, 3.0 - daysBetweenContactAndFever);
@@ -348,7 +355,7 @@ function update() {
         slText = document.getElementById("slVictimAgeText");
         slText.innerHTML = translateAge(victimAge);
 
-        realN = R * tu * tm * fp * ne * fl * fi * fc * L;
+        realN = R * fp * ne * fl * fi * fc * L;
     } catch (exc) {
         realN = maxValue;
     }
