@@ -117,6 +117,23 @@ function translate(locale, key) {
     return dict[key] || "";
 }
 
+function russianNumeration(value, plural, endingWithOne, endingFromTwoToFour) {
+    let lastDigit = (value % 10);
+    let secondDigit = Math.trunc(value / 10) % 10;
+
+    if (secondDigit !== 1) {
+        if (lastDigit === 1) {
+            return endingWithOne;
+        } else if ((lastDigit >= 2) && (lastDigit <= 4)) {
+            return endingFromTwoToFour;
+        } else {
+            return plural;
+        }
+    } else {
+        return plural;
+    }
+}
+
 function translateDays(value) {
     let res = "";
     if (value < -1) {
@@ -124,6 +141,12 @@ function translateDays(value) {
             case "it": return -value + " giorni <b>prima</b> del vostro contatto";
             case "fr": return -value + " jours <b>avant</b> de vôtre contact";
             case "de": return -value + " Tage <b>vor</b> eurer Begegnung";
+            case "ru":
+                if (value <= -5) {
+                    return -value + " дней <b>до</b> вашей встречи";
+                } else {
+                    return -value + " дня <b>до</b> вашей встречи";
+                }
 
             default: return -value + " days <b>before</b> your meeting";
         }
@@ -132,6 +155,7 @@ function translateDays(value) {
             case "it": return "il giorno <b>prima</b> del vostro contatto";
             case "fr": return "le jour <b>avant</b> de vôtre contact";
             case "de": return "am Tag <b>vor</b> eurer Begegnung";
+            case "ru": return "за день <b>до</b> вашей встречи";
 
             default: return "the day <b>before</b> your meeting";
         }
@@ -140,6 +164,7 @@ function translateDays(value) {
             case "it": return "<b>il giorno in cui lo hai incontrato</b>";
             case "fr": return "<b>le jour que vous vous êtes rencontré</b>";
             case "de": return "<b>am Tag der Begegnung</b>";
+            case "ru": return "<b>в день вашей встречи</b>";
 
             default: return "<b>the same day of your meeting</b>";
         }
@@ -148,16 +173,18 @@ function translateDays(value) {
             case "it": return "il giorno <b>dopo</b> il vostro contatto";
             case "fr": return "le jour <b>aprés</b> le contact";
             case "de": return "am Tag <b>nach</b> eurer Begegnung";
+            case "ru": return "в день <b>после</b> вашей встречи";
 
             default: return "the day <b>after</b> your meeting";
         }
     } else {
         switch (language) {
-            case "it": return daysBetweenContactAndFever + " giorni <b>dopo</b> il vostro contatto";
-            case "fr": return daysBetweenContactAndFever + " jours <b>aprés</b> le contact";
-            case "de": return daysBetweenContactAndFever + " Tage <b>nach</b> eurer Begegnung";
+            case "it": return value + " giorni <b>dopo</b> il vostro contatto";
+            case "fr": return value + " jours <b>aprés</b> le contact";
+            case "de": return value + " Tage <b>nach</b> eurer Begegnung";
+            case "ru": return value + " дня <b>после</b> вашей встречи";
 
-            default: return daysBetweenContactAndFever + " days <b>after</b> your meeting";
+            default: return value + " days <b>after</b> your meeting";
         }
     }
 }
@@ -168,6 +195,7 @@ function translateDistance(value) {
             case "it": return "distanza zero ";
             case "fr": return "distance nulle";
             case "de": return "Null Abstand";
+            case "ru": return "Расстояние равное нулю";
 
             default: return "no distance";
         }
@@ -191,6 +219,10 @@ function translateDistance(value) {
                     res = meters + " Meter ";
                     break;
 
+                case "ru":
+                    res = meters + " " + russianNumeration(meter, "метров", "метр", "метра");
+                    break;
+
                 default:
                     res = meters + " meter" + ((meters == 1) ? "" : "s") + " ";
                     break;
@@ -210,6 +242,10 @@ function translateDistance(value) {
                     res += value + " Zentimeter";
                     break;
 
+                case "ru":
+                    res += value + " " + russianNumeration(value, "сантиметров", "сантиметр", "сантиметрa");
+                    break;
+
                 default:
                     res += value + " centimeter" + ((value == 1) ? "" : "s");
                     break;
@@ -225,6 +261,7 @@ function translateTime(value) {
         case "it": return value + " minut" + ((value == 1) ? "o" : "i");
         case "fr": return value + " minute" + ((value == 1) ? "" : "s");
         case "de": return value + " Minute" + ((value == 1) ? "" : "n");
+        case "ru": return value + " " + russianNumeration(value, "минут", "минутy", "минуты");
 
         default: return value + " minut" + ((value == 1) ? "e" : "es");
     }
@@ -235,6 +272,7 @@ function translateAge(value) {
         case "it": return value + " ann" + ((value == 1) ? "o" : "i");
         case "fr": return value + " an" + ((value == 1) ? "" : "s");
         case "de": return value + " Jahr" + ((value == 1) ? "" : "e");
+        case "ru": return value + " " + russianNumeration(value, "лет", "год", "годa");
 
         default: return value = " year" + ((value == 1) ? "" : "s");
     }
