@@ -107,5 +107,12 @@ lang_dict["it"] = {
     "frasi_13": "mi fai questa fotocopia?",
     "frasi_14": "sgomitatore in metropolitana",
     "frasi_15": "strizzargli un punto nero sul naso",
-    "frasi_16": "giochiamo ad annoda-lingue?"
+    "frasi_16": "giochiamo ad annoda-lingue?",
+    "changelog_1": "Versione",
+    "changelog_2": "Primo rilascio",
+    "changelog_3": "Aggiunto supporto Google Analytics",
+    "changelog_4": "Modificati i colori della barra di rischio in giallo/arancio/rosso",
+    "changelog_5": "Aggiunta visiera come DPI integrativo",
+    "changelog_6": "Aggiunto supporto multilingua",
+    "changelog_7": "Aggiunto inglese, tedesco, francese e russo"
 }

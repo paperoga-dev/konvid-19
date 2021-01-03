@@ -107,5 +107,12 @@ lang_dict["en"] = {
     "frasi_13": "please can you do me a copy?",
     "frasi_14": "man elbowing in a metro train",
     "frasi_15": "squeezing his/her nose blackhead",
-    "frasi_16": "shall we twist our tongues?"
+    "frasi_16": "shall we twist our tongues?",
+    "changelog_1": "Version",
+    "changelog_2": "First release",
+    "changelog_3": "Added Google Analytics supports",
+    "changelog_4": "Risk factor colors are now yellow/orange/red",
+    "changelog_5": "Added faceshield as an additional PPE",
+    "changelog_6": "Added multilanguage support",
+    "changelog_7": "Added english, german, french and russian languages"
 }
