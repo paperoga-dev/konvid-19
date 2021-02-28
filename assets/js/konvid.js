@@ -147,6 +147,7 @@ function translateDays(value) {
                 } else {
                     return -value + " дня <b>до</b> вашей встречи";
                 }
+            case "jp": return "私との濃厚接触から " + -value + " <b>　日 </b> 前";
 
             default: return -value + " days <b>before</b> your meeting";
         }
@@ -156,6 +157,7 @@ function translateDays(value) {
             case "fr": return "le jour <b>avant</b> de vôtre contact";
             case "de": return "am Tag <b>vor</b> eurer Begegnung";
             case "ru": return "за день <b>до</b> вашей встречи";
+            case "jp": return "私との濃厚接触から <b> 一日 </b> 前";
 
             default: return "the day <b>before</b> your meeting";
         }
@@ -165,6 +167,7 @@ function translateDays(value) {
             case "fr": return "<b>le jour que vous vous êtes rencontré</b>";
             case "de": return "<b>am Tag der Begegnung</b>";
             case "ru": return "<b>в день вашей встречи</b>";
+            case "jp": return "<b>感染者と濃厚接触があった日</b>";
 
             default: return "<b>the same day of your meeting</b>";
         }
@@ -174,6 +177,7 @@ function translateDays(value) {
             case "fr": return "le jour <b>aprés</b> le contact";
             case "de": return "am Tag <b>nach</b> eurer Begegnung";
             case "ru": return "в день <b>после</b> вашей встречи";
+            case "jp": return "私との濃厚接触から <b> 一日 </b>　後";
 
             default: return "the day <b>after</b> your meeting";
         }
@@ -183,6 +187,7 @@ function translateDays(value) {
             case "fr": return value + " jours <b>aprés</b> le contact";
             case "de": return value + " Tage <b>nach</b> eurer Begegnung";
             case "ru": return value + " дня <b>после</b> вашей встречи";
+            case "jp": return "私との濃厚接触から " + value + "<b>　日 </b> 後";
 
             default: return value + " days <b>after</b> your meeting";
         }
@@ -196,6 +201,7 @@ function translateDistance(value) {
             case "fr": return "distance nulle";
             case "de": return "Null Abstand";
             case "ru": return "Расстояние равное нулю";
+            case "jp": return "距離ゼロ";
 
             default: return "no distance";
         }
@@ -223,6 +229,10 @@ function translateDistance(value) {
                     res = meters + " " + russianNumeration(meter, "метров", "метр", "метра");
                     break;
 
+                case "jp":
+                    res = meters + " メートル ";
+                    break;
+
                 default:
                     res = meters + " meter" + ((meters == 1) ? "" : "s") + " ";
                     break;
@@ -246,6 +256,10 @@ function translateDistance(value) {
                     res += value + " " + russianNumeration(value, "сантиметров", "сантиметр", "сантиметрa");
                     break;
 
+                case "jp":
+                    res += value + " センチ";
+                    break;
+
                 default:
                     res += value + " centimeter" + ((value == 1) ? "" : "s");
                     break;
@@ -262,6 +276,7 @@ function translateTime(value) {
         case "fr": return value + " minute" + ((value == 1) ? "" : "s");
         case "de": return value + " Minute" + ((value == 1) ? "" : "n");
         case "ru": return value + " " + russianNumeration(value, "минут", "минутy", "минуты");
+        case "jp": return value + " 分";
 
         default: return value + " minut" + ((value == 1) ? "e" : "es");
     }
@@ -273,6 +288,7 @@ function translateAge(value) {
         case "fr": return value + " an" + ((value == 1) ? "" : "s");
         case "de": return value + " Jahr" + ((value == 1) ? "" : "e");
         case "ru": return value + " " + russianNumeration(value, "лет", "год", "годa");
+        case "jp": return value + " 歳";
 
         default: return value = " year" + ((value == 1) ? "" : "s");
     }
@@ -422,7 +438,13 @@ function updateLang() {
     let items = document.querySelectorAll('[data-lang]');
 
     for (let item of items) {
-        item.innerHTML = lang_dict[language][item.getAttribute('data-lang')] || lang_dict["en"][item.getAttribute('data-lang')]
+        item.innerHTML = lang_dict[language][item.getAttribute('data-lang')] || lang_dict["en"][item.getAttribute('data-lang')];
+    }
+
+    items = document.querySelectorAll('[pic-lang]');
+
+    for (let item of items) {
+        item.src = pic_dict[language][item.getAttribute('pic-lang')] || pic_dict["en"][item.getAttribute('pic-lang')];
     }
 }
 

@@ -2,6 +2,10 @@ if (typeof lang_dict === "undefined") {
     var lang_dict = {}
 }
 
+if (typeof pic_dict === "undefined") {
+    var pic_dict = {}
+}
+
 lang_dict["it"] = {
     "index_1": "Konvid-19 è un piccolo tool che ti permette di calcolare la percentuale di rischio di essere infettato incontrando (o avendo incontrato) una persona ammalata di Covid-19, o che potrebbe esserne affetta.",
     "index_2": "Konvid-19 <b>non sostituisce nella maniera più assoluta il consiglio del tuo Medico Curante</b> ma grazie ad alcuni parametri che inserirai e che simuleranno il tuo contatto con una persona malata, ti aiuterà a capire quanto la distanza, il tempo o l'utilizzo o meno della mascherina possano contribuire a proteggerti oppure ad aumentare il rischio di essere contagiato.",
@@ -114,5 +118,6 @@ lang_dict["it"] = {
     "changelog_4": "Modificati i colori della barra di rischio in giallo/arancio/rosso",
     "changelog_5": "Aggiunta visiera come DPI integrativo",
     "changelog_6": "Aggiunto supporto multilingua",
-    "changelog_7": "Aggiunto inglese, tedesco, francese e russo"
+    "changelog_7": "Aggiunto inglese, tedesco, francese e russo",
+    "changelog_8": "Aggiunto giapponese"
 }

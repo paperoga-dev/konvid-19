@@ -2,6 +2,10 @@ if (typeof lang_dict === "undefined") {
     var lang_dict = {}
 }
 
+if (typeof pic_dict === "undefined") {
+    var pic_dict = {}
+}
+
 lang_dict["de"] = {
     "index_1": "Konvid-19 ist ein kleines Tool, das dir erlaubt, den Risikofaktor einer Covid-19 Infektion während einer Begegnung mit einer vermutlich an Covid-19 erkrankten Person zu ermitteln.",
     "index_2": "Konvid-19 <b>ersetzt keineswegs die Beratung eines zugelassenen Arztes.</b> Dank jedoch einiger Parameter, die deinen Kontakt zu einer erkrankten Person simulieren, kann das Tool dir dabei helfen, inwiefern die Dauer des Kontakts sowie die mehr oder weniger konsequente Einhaltung der AHA-Formel, das persönliche Risiko einer Infektion beeinflussen.",

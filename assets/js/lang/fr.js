@@ -2,6 +2,10 @@ if (typeof lang_dict === "undefined") {
     var lang_dict = {}
 }
 
+if (typeof pic_dict === "undefined") {
+    var pic_dict = {}
+}
+
 lang_dict["fr"] = {
     "index_1": "Konvid-19 est un petit outil qui te permet de calculer le pourcentage de risque d'être infecté en rencontrant (ou ayant rencontré) une personne malade de Covid-19, ou qui pourrait en être affecté.",
     "index_2": "Konvid-19 <b>il ne remplace absolument pas l'avis de votre médecin</b> mais grâce à quelques paramètres que vous saisirez et qui simuleront votre contact avec une personne malade, cela vous aidera à comprendre combien la distance, le temps ou l'utilisation ou non du masque peut vous aider à vous protéger ou augmenter le risque d'être infecté.",

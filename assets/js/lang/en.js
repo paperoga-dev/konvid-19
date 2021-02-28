@@ -2,6 +2,10 @@ if (typeof lang_dict === "undefined") {
     var lang_dict = {}
 }
 
+if (typeof pic_dict === "undefined") {
+    var pic_dict = {}
+}
+
 lang_dict["en"] = {
     "index_1": "Konvid-19 is a tool that calculates the risk factor of a Covid-infection when meeting someone ill, or that could be infected by Covid-19.",
     "index_2": "Konvid-19 <b>does not replace, in any way, your Doctor's advice</b> but it will help you understand how the distance, contact time and DPI usage can help you protecting against Covid or increase the chances of being infected, just with the input of few parameters aimed to simulate the contact environment with an ill person.",
@@ -114,5 +118,10 @@ lang_dict["en"] = {
     "changelog_4": "Risk factor colors are now yellow/orange/red",
     "changelog_5": "Added faceshield as an additional PPE",
     "changelog_6": "Added multilanguage support",
-    "changelog_7": "Added english, german, french and russian languages"
+    "changelog_7": "Added english, german, french and russian languages",
+    "changelog_8": "Added japanese language"
+}
+
+pic_dict["en"] = {
+    "kon-mountain": "images/kon-mountain.jpg"
 }
